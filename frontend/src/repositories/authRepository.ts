@@ -27,6 +27,26 @@ export async function getUserWithMetadata(userId: string) {
   return user;
 }
 
+export async function getAuthUserAndProfile() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    return { authUser: null, profile: null };
+  }
+
+  const { data: profile } = await supabase
+    .from("users")
+    .select("role")
+    .eq("users_id", user.id)
+    .maybeSingle();
+
+  return { authUser: user, profile };
+}
+
 export async function signInWithPassword(email: string, password: string) {
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });

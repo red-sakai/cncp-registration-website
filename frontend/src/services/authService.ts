@@ -1,4 +1,4 @@
-import { findUserByEmail, getUserProfile } from "@/repositories/userRepository";
+import { findUserByEmail } from "@/repositories/userRepository";
 import { 
   getAuthUser, 
   getUserWithMetadata,
@@ -20,30 +20,25 @@ export async function checkEmailExists(email: string): Promise<boolean> {
   return !!data;
 }
 
-// Get user role
+// Get user role — single Supabase client, single getUser() call
 export async function getUserRole() {
-  const user = await getAuthUser();
-  if (!user) {
+  const { authUser, profile } = await (
+    await import("@/repositories/authRepository")
+  ).getAuthUserAndProfile();
+
+  if (!authUser) {
     return { role: null, userId: null };
   }
 
-  let isAdmin = false;
-
-  const authUser = await getUserWithMetadata(user.id);
-  if (authUser) {
-    const appRole = (authUser.app_metadata?.role as string) ?? null;
-    const jwtRole = authUser.role ?? null;
-    isAdmin = appRole === "admin" || jwtRole === "admin";
-  }
-
-  if (!isAdmin) {
-    const profile = await getUserProfile(user.id);
-    isAdmin = (profile?.role as string) === "admin";
-  }
+  const appRole = (authUser.app_metadata?.role as string) ?? null;
+  const jwtRole = authUser.role ?? null;
+  const dbRole = (profile?.role as string) ?? null;
+  const isAdmin =
+    appRole === "admin" || jwtRole === "admin" || dbRole === "admin";
 
   return {
     role: isAdmin ? "admin" : "user",
-    userId: user.id,
+    userId: authUser.id,
   };
 }
 

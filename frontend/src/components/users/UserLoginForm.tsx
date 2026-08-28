@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { loginAction } from "@/actions/authActions";
-import { getUserRoleAction } from "@/actions/authActions";
 import { getLastViewedEventSlug } from "@/utils/last-viewed-event";
 import { useUserStore } from "@/store/useUserStore";
 
@@ -29,41 +28,26 @@ export default function UserLoginForm({
   useEffect(() => {
     if (!state?.success || redirectDone.current) return;
     redirectDone.current = true;
-    let cancelled = false;
-    (async () => {
-      const res = await getUserRoleAction();
-      if (cancelled) return;
-      const data = (res.data ?? {}) as { role?: string | null; userId?: string | null };
 
-      // Update global store
-      const userRole =
-        data?.role === "admin"
-          ? "admin"
-          : data?.role === "user"
-            ? "user"
-            : null;
-      useUserStore.getState().setUser(userRole, data?.userId ?? null);
+    const userRole = state.data?.role === "admin" ? "admin" : "user";
+    useUserStore.getState().setUser(userRole, state.data?.userId ?? null);
 
-      if (userRole === "admin") {
-        router.replace("/admin/dashboard");
-        return;
-      }
-      const rawNext = searchParams.get("next");
-      const nextPath =
-        rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//")
-          ? rawNext
-          : null;
-      if (nextPath) {
-        router.replace(nextPath);
-        return;
-      }
-      const lastSlug = getLastViewedEventSlug();
-      router.replace(lastSlug ? `/event/${lastSlug}` : "/my-events");
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [state?.success, router, searchParams]);
+    if (userRole === "admin") {
+      router.replace("/admin/dashboard");
+      return;
+    }
+    const rawNext = searchParams.get("next");
+    const nextPath =
+      rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//")
+        ? rawNext
+        : null;
+    if (nextPath) {
+      router.replace(nextPath);
+      return;
+    }
+    const lastSlug = getLastViewedEventSlug();
+    router.replace(lastSlug ? `/event/${lastSlug}` : "/my-events");
+  }, [state?.success, state?.data?.role, state?.data?.userId, router, searchParams]);
 
   return (
     <div

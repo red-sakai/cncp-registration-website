@@ -32,16 +32,19 @@ export const loginAction = withActionErrorHandler(
     const email = (formData.get("email") as string)?.trim() ?? "";
     const password = (formData.get("password") as string) ?? "";
 
-    const { loginUser } = await import("@/services/authService");
+    const { loginUser, getUserRole } = await import("@/services/authService");
     const { LoginSchema } = await import("@/validators/authValidators");
 
     LoginSchema.parse({ email, password });
     await loginUser(email, password);
 
+    const { role, userId } = await getUserRole();
+
     const { revalidatePath } = await import("next/cache");
     revalidatePath("/", "layout");
 
     logger.info(`User logged in with email: ${email}`);
+    return { success: true, role, userId };
   },
 );
 
@@ -84,7 +87,7 @@ export const registerAction = withActionErrorHandler(
 );
 
 // auth result type
-export type AuthResult = { error?: string; success?: boolean };
+export type AuthResult = { error?: string; success?: boolean; role?: string | null; userId?: string | null };
 
 // logout action
 export const logoutAction = withActionErrorHandler(async () => {
