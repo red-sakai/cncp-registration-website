@@ -1,0 +1,1016 @@
+"use client";
+
+import { normalizeNameKey } from "@/utils/normalizeName";
+import Image from "next/image";
+import nunjucks from "nunjucks";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import type { CsvMapping, ParsedCsv } from "./CsvUploader";
+// email editing is performed in the Template tab
+import type { AttachIndex } from "./AttachmentsUploader";
+import VariablePicker from "./VariablePicker";
+
+const PREVIEW_RESET_STYLE =
+  "<style>html,body{margin:0!important;padding:0!important;background-color:transparent!important;}</style>";
+
+const normalizePreviewHtml = (html: string) => {
+  const trimmed = (html || "").trim();
+  if (!trimmed) {
+    return `<!DOCTYPE html><html><head>${PREVIEW_RESET_STYLE}</head><body></body></html>`;
+  }
+  if (/<head[\s>]/i.test(trimmed)) {
+    return trimmed.replace(/<head([^>]*)>/i, (_, attrs = "") => `<head${attrs}>${PREVIEW_RESET_STYLE}`);
+  }
+  if (/<html[\s>]/i.test(trimmed)) {
+    return trimmed.replace(
+      /<html([^>]*)>/i,
+      (_, attrs = "") => `<html${attrs}><head>${PREVIEW_RESET_STYLE}</head>`
+    );
+  }
+  return `<!DOCTYPE html><html><head>${PREVIEW_RESET_STYLE}</head><body>${trimmed}</body></html>`;
+};
+
+type Props = {
+  csv: ParsedCsv | null;
+  mapping: CsvMapping | null;
+  template: string;
+  onExportJson: (render: (row: Record<string, string>) => string) => void;
+  subjectTemplate?: string;
+  onSubjectChange?: (next: string) => void;
+  attachmentsByName?: AttachIndex;
+  extraContext?: Record<string, unknown>;
+  showSubjectEditor?: boolean;
+};
+
+export default function PreviewPane({
+  csv,
+  mapping,
+  template,
+  onExportJson,
+  subjectTemplate = "",
+  onSubjectChange,
+  attachmentsByName,
+  extraContext,
+  showSubjectEditor = true,
+}: Props) {
+  type QueueStatus = "queued" | "sending" | "sent" | "error";
+
+  const [showSendModal, setShowSendModal] = useState(false);
+  const [sendModalLogs, setSendModalLogs] = useState<
+    Array<{
+      to: string;
+      status: string;
+      subject?: string;
+      error?: string;
+      messageId?: string;
+      attachments?: number;
+      timestamp?: string;
+    }>
+  >([]);
+  const [sendModalSummary, setSendModalSummary] = useState<{
+    sent: number;
+    failed: number;
+  }>({ sent: 0, failed: 0 });
+  const [sendModalTotal, setSendModalTotal] = useState<number | null>(null);
+  const [sendQueue, setSendQueue] = useState<
+    Array<{ index: number; batch: number; to: string; status: QueueStatus; error?: string }>
+  >([]);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [currentBatchIndex, setCurrentBatchIndex] = useState<number>(0);
+  const [batchAssignments, setBatchAssignments] = useState<
+    Array<{ batch: number; recipients: string[] }>
+  >([]);
+  const [isSending, setIsSending] = useState(false);
+  const [cooldownSec, setCooldownSec] = useState(0);
+  // User-selectable batch size (3 or 4)
+  const [batchSize, setBatchSize] = useState<number>(4);
+  const [previewRowIndex, setPreviewRowIndex] = useState<number>(0);
+  const ready = !!csv && !!mapping && !!template?.trim();
+  const [envOk, setEnvOk] = useState<boolean | null>(null);
+  const [missing, setMissing] = useState<string[]>([]);
+  const subjectInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/env")
+      .then((r) => r.json())
+      .then((d) => {
+        if (!mounted) return;
+        setEnvOk(!!d.ok);
+        setMissing(Array.isArray(d.missing) ? d.missing : []);
+      })
+      .catch(() => {
+        if (!mounted) return;
+        setEnvOk(false);
+        setMissing(["SENDER_EMAIL", "SENDER_APP_PASSWORD", "SENDER_NAME"]);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Profiles removed from UI; sender env is fixed to Arduino Day Philippines.
+
+  // Attachment handling removed from PreviewPane (now in CSV tab).
+
+  // Cooldown timer: when cooldownSec > 0, tick down every second
+  useEffect(() => {
+    if (cooldownSec <= 0) return;
+    const id = setInterval(() => {
+      setCooldownSec((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [cooldownSec]);
+
+  const renderRow = useCallback(
+    (row: Record<string, string>) => {
+      if (!mapping) return template;
+      // Build context with all CSV fields, and standard aliases name/recipient.
+      const ctx: Record<string, unknown> = { ...row, ...(extraContext || {}) };
+      ctx.name = row[mapping.name];
+      ctx.recipient = row[mapping.recipient];
+      try {
+        // Render using nunjucks (Jinja compatible)
+        return nunjucks.renderString(template, ctx);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return `<!-- Render error: ${msg} -->\n` + template;
+      }
+    },
+    [mapping, template, extraContext]
+  );
+
+  const previewHtml = useMemo(() => {
+    if (!csv || !mapping) return normalizePreviewHtml(template);
+    const row = csv.rows[previewRowIndex];
+    const html = row ? renderRow(row) : template;
+    return normalizePreviewHtml(html);
+  }, [csv, mapping, template, previewRowIndex, renderRow]);
+
+  const recipients = useMemo(() => {
+    if (!csv || !mapping) return [] as string[];
+    return (csv.rows as Array<Record<string, string>>)
+      .filter((r) => r[mapping.recipient])
+      .map((r) => String(r[mapping.recipient]));
+  }, [csv, mapping]);
+
+  const requiresSingleBatch = useMemo(() => {
+    if (!attachmentsByName) return false;
+    const min = 1024 * 1024;
+    const max = 2 * 1024 * 1024;
+    return Object.values(attachmentsByName).some((entries) =>
+      Array.isArray(entries)
+        ? entries.some((entry) => {
+            if (!entry) return false;
+            const size = entry.sizeBytes ?? 0;
+            const filename = entry.filename?.toLowerCase() || "";
+            const mime = (entry.contentType || "").toLowerCase();
+            const isPdf = mime.includes("pdf") || filename.endsWith(".pdf");
+            return Boolean(isPdf && size >= min && size <= max);
+          })
+        : false
+    );
+  }, [attachmentsByName]);
+
+  const attachmentsPresent = useMemo(() => {
+    if (!attachmentsByName) return false;
+    return Object.values(attachmentsByName).some(
+      (arr) => Array.isArray(arr) && arr.length > 0
+    );
+  }, [attachmentsByName]);
+
+  const maxBatchSize = requiresSingleBatch ? 1 : attachmentsPresent ? 3 : 4;
+  const limitedToThree = !requiresSingleBatch && attachmentsPresent;
+
+  useEffect(() => {
+    if (batchSize > maxBatchSize) {
+      setBatchSize(maxBatchSize);
+    }
+  }, [maxBatchSize, batchSize]);
+
+  // Preview batches (size = batchSize) so user can see grouping before sending
+  const batchPreview = useMemo(() => {
+    const list: Array<{ batch: number; recipients: string[] }> = [];
+    if (!recipients || recipients.length === 0) return list;
+    const SIZE = Math.max(1, Math.min(batchSize, maxBatchSize));
+    for (let i = 0; i < recipients.length; i += SIZE) {
+      list.push({
+        batch: i / SIZE + 1,
+        recipients: recipients.slice(i, i + SIZE),
+      });
+    }
+    return list;
+  }, [recipients, batchSize, maxBatchSize]);
+
+  const availableVars = useMemo(() => {
+    const s = new Set<string>();
+    if (csv?.headers) csv.headers.forEach((h) => s.add(h));
+    if (mapping) {
+      s.add("name");
+      s.add("recipient");
+    }
+    if (extraContext) Object.keys(extraContext).forEach((key) => s.add(key));
+    return Array.from(s);
+  }, [csv, mapping, extraContext]);
+
+  const attachmentsByRecipient = useMemo(() => {
+    if (!csv || !mapping || !attachmentsByName) return new Map<string, string[]>();
+    const map = new Map<string, string[]>();
+    for (const row of csv.rows as Array<Record<string, string>>) {
+      const email = row[mapping.recipient];
+      const nameVal = row[mapping.name];
+      if (!email || !nameVal) continue;
+      const normalized = normalizeNameKey(nameVal.toString());
+      const entries = attachmentsByName[normalized];
+      if (!entries || entries.length === 0) continue;
+      const files = entries
+        .filter(Boolean)
+        .map((entry) => entry.filename || "Attachment");
+      if (files.length > 0) map.set(String(email), files);
+    }
+    return map;
+  }, [csv, mapping, attachmentsByName]);
+  const usedSubjectVars = useMemo(() => {
+    const vars = new Set<string>();
+    const re = /\{\{\s*([a-zA-Z_][\w\.]*)\s*\}\}/g;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(subjectTemplate || ""))) vars.add(m[1]);
+    return Array.from(vars);
+  }, [subjectTemplate]);
+
+  const usedBodyVars = useMemo(() => {
+    const vars = new Set<string>();
+    const re = /\{\{\s*([a-zA-Z_][\w\.]*)\s*\}\}/g;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(template || ""))) vars.add(m[1]);
+    return Array.from(vars);
+  }, [template]);
+
+  const allUsed = useMemo(
+    () => Array.from(new Set([...usedSubjectVars, ...usedBodyVars])),
+    [usedSubjectVars, usedBodyVars]
+  );
+  const invalidUsed = useMemo(
+    () => allUsed.filter((v) => !availableVars.includes(v)),
+    [allUsed, availableVars]
+  );
+
+  const insertSubjectVariable = useCallback(
+    (variable: string) => {
+      if (!onSubjectChange) return;
+      const addition = `{{ ${variable} }}`;
+      const value = subjectTemplate ?? "";
+      const input = subjectInputRef.current;
+      if (!input) {
+        onSubjectChange(`${value}${addition}`);
+        return;
+      }
+      const start = input.selectionStart ?? value.length;
+      const end = input.selectionEnd ?? value.length;
+      const next = value.slice(0, start) + addition + value.slice(end);
+      onSubjectChange(next);
+      requestAnimationFrame(() => {
+        input.focus();
+        const caret = start + addition.length;
+        input.setSelectionRange(caret, caret);
+      });
+    },
+    [onSubjectChange, subjectTemplate]
+  );
+
+  const variantLabel = "Arduino Day Philippines";
+
+  const doSendEmails = useCallback(async () => {
+    if (!ready || !csv || !mapping) return;
+    const allRows = csv.rows.filter((r) => r[mapping.recipient]);
+    const total = allRows.length;
+    const BATCH_SIZE = Math.max(1, Math.min(batchSize, maxBatchSize));
+    setShowSendModal(true);
+    setSendError(null);
+    setSendModalLogs([]);
+    setSendModalSummary({ sent: 0, failed: 0 });
+    setSendModalTotal(total);
+    // Compute and expose batch groupings for UI
+    const assignments: Array<{ batch: number; recipients: string[] }> = [];
+    for (let i = 0; i < total; i += BATCH_SIZE) {
+      const recips = allRows
+        .slice(i, i + BATCH_SIZE)
+        .map((r) => String(r[mapping.recipient]));
+      assignments.push({ batch: i / BATCH_SIZE + 1, recipients: recips });
+    }
+    setBatchAssignments(assignments);
+    setSendQueue(
+      allRows.map((row, idx) => ({
+        index: idx,
+        batch: Math.floor(idx / BATCH_SIZE) + 1,
+        to: String(row[mapping.recipient]),
+        status: "queued",
+      }))
+    );
+    try {
+      setIsSending(true);
+      for (let start = 0; start < total; start += BATCH_SIZE) {
+        setCurrentBatchIndex(start / BATCH_SIZE);
+        const batch = allRows.slice(start, start + BATCH_SIZE);
+        setSendQueue((prev) =>
+          prev.map((item) =>
+            item.index >= start && item.index < start + batch.length
+              ? { ...item, status: "sending", error: undefined }
+              : item
+          )
+        );
+        const body = {
+          rows: batch,
+          mapping,
+          template,
+          subjectTemplate: subjectTemplate?.trim() || undefined,
+          extraContext,
+          attachmentsByName,
+          delayMs: 2000,
+          jitterMs: 250,
+        };
+        const res = await fetch("/api/send/stream", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        if (!res.ok || !res.body) {
+          const data = await res.json().catch(() => null);
+          // mark whole batch as failed
+          for (let batchIdx = 0; batchIdx < batch.length; batchIdx += 1) {
+            const r = batch[batchIdx];
+            const to = String(r[mapping.recipient] || "");
+            const errMsg = data?.error || "Batch failed";
+            setSendModalLogs((prev) => [
+              ...prev,
+              {
+                to,
+                status: "error",
+                error: errMsg,
+                attachments: 0,
+                timestamp: new Date().toISOString(),
+              },
+            ]);
+            const queueIndex = start + batchIdx;
+            setSendQueue((prev) =>
+              prev.map((item) =>
+                item.index === queueIndex
+                  ? { ...item, status: "error", error: errMsg }
+                  : item
+              )
+            );
+          }
+          setSendError((prev) => prev || (data?.error || "One batch failed to send."));
+          setSendModalSummary((prev) => ({
+            sent: prev.sent,
+            failed: prev.failed + batch.length,
+          }));
+          continue;
+        }
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          let idx: number;
+          while ((idx = buffer.indexOf("\n")) >= 0) {
+            const line = buffer.slice(0, idx).trim();
+            buffer = buffer.slice(idx + 1);
+            if (!line) continue;
+            try {
+              const obj = JSON.parse(line);
+              if (obj.type === "start") {
+                // keep total as overall; only set if not yet set
+                setSendModalTotal((prev) =>
+                  prev == null
+                    ? typeof obj.total === "number"
+                      ? obj.total
+                      : null
+                    : prev
+                );
+              } else if (obj.type === "item") {
+                const queueIndex =
+                  typeof obj.index === "number" ? start + obj.index : null;
+                setSendModalLogs((prev) => [
+                  ...prev,
+                  {
+                    to: obj.to,
+                    status: obj.status,
+                    subject: obj.subject,
+                    error: obj.error,
+                    messageId: obj.messageId,
+                    attachments: obj.attachments,
+                    timestamp: obj.timestamp,
+                  },
+                ]);
+                if (queueIndex != null) {
+                  setSendQueue((prev) =>
+                    prev.map((item) =>
+                      item.index === queueIndex
+                        ? {
+                            ...item,
+                            status:
+                              obj.status === "sent" ? "sent" : "error",
+                            error:
+                              obj.status === "error" ? obj.error || "Send failed" : undefined,
+                          }
+                        : item
+                    )
+                  );
+                }
+                setSendModalSummary((prev) => ({
+                  sent: obj.status === "sent" ? prev.sent + 1 : prev.sent,
+                  failed:
+                    obj.status === "error" ? prev.failed + 1 : prev.failed,
+                }));
+              } else if (obj.type === "done") {
+                // no-op; counts already tracked
+              }
+            } catch {
+              setSendError((prev) => prev || "Received invalid stream data while sending.");
+            }
+          }
+        }
+        if (buffer.trim()) {
+          try {
+            const obj = JSON.parse(buffer.trim());
+            if (obj.type === "item") {
+              const queueIndex =
+                typeof obj.index === "number" ? start + obj.index : null;
+              setSendModalLogs((prev) => [
+                ...prev,
+                {
+                  to: obj.to,
+                  status: obj.status,
+                  subject: obj.subject,
+                  error: obj.error,
+                  messageId: obj.messageId,
+                  attachments: obj.attachments,
+                  timestamp: obj.timestamp,
+                },
+              ]);
+              if (queueIndex != null) {
+                setSendQueue((prev) =>
+                  prev.map((item) =>
+                    item.index === queueIndex
+                      ? {
+                          ...item,
+                          status: obj.status === "sent" ? "sent" : "error",
+                          error:
+                            obj.status === "error" ? obj.error || "Send failed" : undefined,
+                        }
+                      : item
+                  )
+                );
+              }
+              setSendModalSummary((prev) => ({
+                sent: obj.status === "sent" ? prev.sent + 1 : prev.sent,
+                failed: obj.status === "error" ? prev.failed + 1 : prev.failed,
+              }));
+            }
+          } catch {
+            setSendError((prev) => prev || "Failed to parse final stream response.");
+          }
+        }
+        // small pause between batches
+        await new Promise((r) => setTimeout(r, 200));
+      }
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Unexpected send error";
+      setSendError(message);
+    } finally {
+      setIsSending(false);
+      setCooldownSec(5);
+    }
+  }, [
+    ready,
+    csv,
+    mapping,
+    template,
+    subjectTemplate,
+    attachmentsByName,
+    extraContext,
+    batchSize,
+    maxBatchSize,
+  ]);
+
+
+  return (
+    <>
+      <div className="rounded-lg border p-4 space-y-4">
+        <div
+          className="flex items-center justify-between gap-3 flex-wrap"
+          id="tutorial-env-controls"
+        >
+          <h2 className="text-lg font-medium">3) Preview & Export</h2>
+          <div className="flex items-center gap-2">
+            {/* Variable insertion moved to Template tab */}
+            {envOk === true && (
+              <span className="px-2 py-0.5 rounded border text-xs bg-green-50 border-green-200 text-green-800">
+                Sender env OK
+              </span>
+            )}
+            {envOk === false && (
+              <span className="px-2 py-0.5 rounded border text-xs bg-red-50 border-red-200 text-red-800">
+                Missing env: {missing.join(", ")}
+              </span>
+            )}
+            <div className="flex items-center gap-2 text-xs">
+              <span className="opacity-70">Sender:</span>
+              <span className="px-2 py-0.5 rounded border bg-white text-gray-900">
+                {variantLabel}
+              </span>
+              <Image
+                src="/email-template/arduinoday.jpg"
+                alt="Arduino Day Philippines"
+                width={32}
+                height={32}
+                className="h-6 w-6 rounded border"
+              />
+            </div>
+            <button
+              type="button"
+              disabled={!ready}
+              onClick={() => ready && onExportJson((row) => renderRow(row))}
+              className={`px-3 py-1 rounded border text-sm ${
+                ready
+                  ? "bg-gray-900 border-gray-900 text-white hover:bg-black"
+                  : "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              Export JSON
+            </button>
+            <button
+              type="button"
+              disabled={
+                !ready || envOk === false || isSending || cooldownSec > 0
+              }
+              onClick={async () => {
+                if (!ready || !csv || !mapping || isSending || cooldownSec > 0)
+                  return;
+                await doSendEmails();
+              }}
+              className={`px-3 py-1 rounded border text-sm ${
+                ready && envOk !== false && !isSending && cooldownSec === 0
+                  ? "bg-green-600 border-green-700 text-white hover:bg-green-700"
+                  : "opacity-50 cursor-not-allowed"
+              } ${isSending ? "cursor-wait" : ""}`}
+            >
+              {isSending ? (
+                <span className="inline-flex items-center gap-2">
+                  <svg
+                    className="animate-spin h-4 w-4"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                  </svg>
+                  Sending…
+                </span>
+              ) : cooldownSec > 0 ? (
+                `Wait ${cooldownSec}s`
+              ) : (
+                "Send Emails"
+              )}
+            </button>
+            {/* Stream Send button removed per user request */}
+          </div>
+        </div>
+        {sendError && (
+          <div className="rounded border border-red-200 bg-red-50 text-red-700 text-xs px-3 py-2">
+            Send error: {sendError}
+          </div>
+        )}
+
+        {/* Attachments uploader moved to CSV tab */}
+
+        {!csv && (
+          <div className="text-sm opacity-80">
+            Upload a CSV to see previews.
+          </div>
+        )}
+        {csv && !mapping && (
+          <div className="text-sm opacity-80">
+            Set column mapping to preview emails.
+          </div>
+        )}
+        {csv && mapping && !template?.trim() && (
+          <div className="text-sm opacity-80">
+            Provide an HTML template to preview.
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+          <div className="lg:col-span-1 border rounded" id="tutorial-recipient-list">
+            <div className="px-3 py-2 text-sm bg-gray-50 border-b font-medium flex items-center justify-between">
+              <span>Recipients</span>
+              <span className="text-xs opacity-70">{recipients.length}</span>
+            </div>
+            <div className="max-h-80 overflow-auto text-xs">
+              {recipients.length === 0 && (
+                <div className="p-3 opacity-70">
+                  No recipients. Map a recipient column in the CSV tab.
+                </div>
+              )}
+              <ul className="divide-y">
+                {recipients.map((email, idx) => (
+                  <li key={`${email}-${idx}`} className="px-3 py-2">
+                    {email}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2 space-y-4">
+            {showSubjectEditor && (
+              <div className="space-y-2" id="tutorial-subject-editor">
+                <div className="text-sm font-medium">Subject</div>
+                <div className="flex items-center gap-2">
+                  <input
+                    ref={subjectInputRef}
+                    value={subjectTemplate}
+                    onChange={(e) => onSubjectChange?.(e.target.value)}
+                    placeholder="e.g. Hello {{ name }}"
+                    className="flex-1 rounded border px-3 py-2 text-sm"
+                  />
+                  <VariablePicker
+                    variables={availableVars}
+                    label="Insert variable"
+                    onInsert={(v) => insertSubjectVariable(v)}
+                  />
+                </div>
+                {allUsed.length > 0 && (
+                  <div className="text-xs flex flex-wrap gap-2">
+                    <span className="opacity-70">Variables used:</span>
+                    {allUsed.map((v) => (
+                      <span
+                        key={v}
+                        className={`px-2 py-0.5 rounded border ${
+                          availableVars.includes(v)
+                            ? "bg-green-50 border-green-200 text-green-800"
+                            : "bg-red-50 border-red-200 text-red-800"
+                        }`}
+                      >
+                        {`{{ ${v} }}`}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {invalidUsed.length > 0 && (
+                  <div className="text-xs text-red-700">
+                    Unknown variables: {invalidUsed.join(", ")} (not found in
+                    CSV headers)
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="space-y-2" id="tutorial-preview-frame">
+              <div className="text-sm font-medium">Preview</div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setPreviewRowIndex((p) => Math.max(0, p - 1))}
+                  disabled={previewRowIndex === 0}
+                  className="px-3 py-1 rounded border text-sm bg-white hover:bg-gray-50 disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <span className="text-xs text-gray-600">
+                  Previewing row {previewRowIndex + 1} of {csv?.rowCount ?? 0}
+                </span>
+                <button
+                  onClick={() =>
+                    setPreviewRowIndex((p) =>
+                      Math.min((csv?.rowCount ?? 1) - 1, p + 1)
+                    )
+                  }
+                  disabled={!csv || previewRowIndex >= csv.rowCount - 1}
+                  className="px-3 py-1 rounded border text-sm bg-white hover:bg-gray-50 disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+              <iframe
+                srcDoc={previewHtml}
+                className="w-full h-96 border rounded bg-white"
+                sandbox="allow-scripts"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Batches preview (always visible when recipients exist) */}
+        {batchPreview.length > 0 && (
+          <div className="border rounded p-3 bg-white space-y-2" id="tutorial-batch-preview">
+            <div className="text-sm font-medium flex items-center gap-2">
+              <span>Batches (preview)</span>
+              <span className="text-xs opacity-70">
+                {batchPreview.length} total
+              </span>
+            </div>
+            {/* Batch size selector */}
+            <div className="flex items-center gap-3 text-xs flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="opacity-70">Batch size:</span>
+                {[1, 3, 4].map((size) => {
+                  const disabled =
+                    (requiresSingleBatch && size !== 1) ||
+                    (limitedToThree && size === 4);
+                  return (
+                    <label
+                      key={size}
+                      className={`inline-flex items-center gap-1 cursor-pointer ${
+                        disabled ? "opacity-40 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="batchSize"
+                        value={size}
+                        checked={batchSize === size}
+                        onChange={() => setBatchSize(size)}
+                        className="accent-gray-800"
+                        disabled={disabled}
+                      />
+                      <span>{size}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              <div className="text-[11px] text-gray-600">
+                {requiresSingleBatch ? (
+                  <span className="text-yellow-800">
+                    Large 1-2 MB PDF attachments detected. Sending is locked
+                    to 1 email per batch.
+                  </span>
+                ) : attachmentsPresent ? (
+                  <span>
+                    <strong>Tip:</strong> Attachments detected. Sending is
+                    capped at <strong>3 per batch</strong> to reduce payload
+                    size.
+                  </span>
+                ) : (
+                  <span>
+                    <strong>Tip:</strong> No attachments detected. You can use
+                    <strong> 4 per batch</strong> for faster overall sending.
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="max-h-48 overflow-auto text-xs bg-gray-50 border rounded">
+              <ul className="divide-y">
+                {batchPreview.map((b) => (
+                  <li key={`batch-${b.batch}`} className="px-3 py-2 space-y-1">
+                    <div className="font-medium">Batch {b.batch}</div>
+                    <div className="text-gray-700 space-y-1">
+                      {b.recipients.map((email) => {
+                        const attachments = attachmentsByRecipient.get(email) || [];
+                        return (
+                          <div
+                            key={`${b.batch}-${email}`}
+                            className="flex flex-wrap gap-1 items-center"
+                          >
+                            <span className="wrap-break-word">{email}</span>
+                            {attachments.length > 0 && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 border rounded bg-white">
+                                📎
+                                <span>
+                                  {attachments.length} file
+                                  {attachments.length > 1 ? "s" : ""}
+                                </span>
+                                <span className="text-gray-500">
+                                  ({attachments.slice(0, 2).join(", ")}
+                                  {attachments.length > 2
+                                    ? ` +${attachments.length - 2}`
+                                    : ""})
+                                </span>
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="text-[11px] text-gray-600">
+              Sending is performed sequentially per batch with a jittered ~2s
+              delay per email to reduce throttling and avoid serverless
+              timeouts.
+            </div>
+          </div>
+        )}
+      </div>
+      {/* Streaming progress UI removed */}
+      {showSendModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-slate-950/80 w-full max-w-3xl rounded-xl border border-primary/20 shadow-lg">
+            <div className="px-4 py-3 border-b border-primary/15 flex items-center justify-between">
+              <div className="text-sm font-semibold text-primary">
+                {isSending ? "Sending… Live Log" : "Send Summary"}
+              </div>
+              <button
+                className="text-xs px-2 py-1 border border-primary/30 rounded text-primary bg-primary/5 hover:bg-primary/10"
+                onClick={() => setShowSendModal(false)}
+              >
+                Close
+              </button>
+            </div>
+            <div className="p-4 space-y-3">
+              {sendError && (
+                <div className="rounded border border-red-500/30 bg-red-500/10 text-red-300 text-xs px-3 py-2">
+                  {sendError}
+                </div>
+              )}
+              <div className="text-xs flex gap-4 items-center text-secondary">
+                <span>
+                  <strong className="text-primary">Sent:</strong> {sendModalSummary.sent}
+                </span>
+                <span>
+                  <strong className="text-primary">Failed:</strong> {sendModalSummary.failed}
+                </span>
+                {typeof sendModalTotal === "number" && (
+                  <span>
+                    <strong className="text-primary">Remaining:</strong>{" "}
+                    {Math.max(
+                      0,
+                      sendModalTotal -
+                        (sendModalSummary.sent + sendModalSummary.failed)
+                    )}
+                  </span>
+                )}
+                {isSending && (
+                  <span className="opacity-70 animate-pulse">In Progress…</span>
+                )}
+              </div>
+              {typeof sendModalTotal === "number" && (
+                <div className="w-full h-2 bg-primary/10 rounded">
+                  <div
+                    className="h-2 bg-primary rounded"
+                    style={{
+                      width: `${Math.min(
+                        100,
+                        Math.floor(
+                          ((sendModalSummary.sent + sendModalSummary.failed) /
+                            (sendModalTotal || 1)) *
+                            100
+                        )
+                      )}%`,
+                    }}
+                  />
+                </div>
+              )}
+              {/* Batch overview */}
+              {batchAssignments.length > 0 && (
+                <div className="border border-primary/20 rounded p-2 bg-primary/5 text-xs">
+                  <div className="mb-1 font-semibold text-primary">Batches</div>
+                  <div className="flex flex-col gap-1 max-h-32 overflow-auto">
+                    {batchAssignments.map((b, idx) => (
+                      <div
+                        key={idx}
+                        className={`flex gap-2 items-start ${
+                          idx === currentBatchIndex ? "text-emerald-400" : "text-secondary"
+                        }`}
+                      >
+                        <span className="min-w-[60px] inline-block">
+                          Batch {b.batch}:
+                        </span>
+                        <span className="flex-1 wrap-break-word">
+                          {b.recipients.join(", ")}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/* Queue overview */}
+              {sendQueue.length > 0 && (
+                <div className="border border-primary/20 rounded p-2 bg-slate-950/70 text-xs">
+                  <div className="mb-1 font-semibold text-primary">
+                    Queue ({sendQueue.length})
+                  </div>
+                  <div className="max-h-28 overflow-auto space-y-1">
+                    {sendQueue.map((item) => (
+                      <div
+                        key={`queue-${item.index}-${item.to}`}
+                        className="flex items-center gap-2 text-secondary"
+                      >
+                        <span className="min-w-[58px] text-primary/80">B{item.batch}</span>
+                        <span className="flex-1 wrap-break-word">{item.to}</span>
+                        <span
+                          className={`px-2 py-0.5 rounded border ${
+                            item.status === "sent"
+                              ? "border-emerald-400/40 text-emerald-300"
+                              : item.status === "error"
+                                ? "border-rose-400/40 text-rose-300"
+                                : item.status === "sending"
+                                  ? "border-cyan-400/40 text-cyan-300"
+                                  : "border-primary/30 text-primary/80"
+                          }`}
+                        >
+                          {item.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {isSending && (
+                <div className="text-xs text-secondary bg-primary/10 border border-primary/20 rounded p-2">
+                  Sending is paced with a ~2 second delay per email to reduce
+                  the risk of provider throttling, rate limits, or spam
+                  detection. This helps keep delivery reliable when sending to
+                  many recipients.
+                </div>
+              )}
+              <div className="max-h-72 overflow-auto border border-primary/20 rounded text-xs font-mono bg-slate-950/70">
+                <table className="min-w-full text-xs">
+                  <thead className="sticky top-0 bg-primary/10">
+                    <tr>
+                      <th className="text-left px-2 py-1 border border-primary/20 text-primary">Recipient</th>
+                      <th className="text-left px-2 py-1 border border-primary/20 text-primary">Status</th>
+                      <th className="text-left px-2 py-1 border border-primary/20 text-primary">Time</th>
+                      <th className="text-left px-2 py-1 border border-primary/20 text-primary">Subject</th>
+                      <th className="text-left px-2 py-1 border border-primary/20 text-primary">
+                        Attachments
+                      </th>
+                      <th className="text-left px-2 py-1 border border-primary/20 text-primary">
+                        Message / Error
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sendModalLogs.map((l, i) => (
+                      <tr key={i} className="odd:bg-slate-950/70 even:bg-primary/5">
+                        <td className="px-2 py-1 border border-primary/20 whitespace-pre-wrap wrap-break-word text-secondary">
+                          {l.to}
+                        </td>
+                        <td
+                          className={`px-2 py-1 border border-primary/20 ${
+                            l.status === "sent"
+                              ? "text-emerald-400"
+                              : "text-rose-400"
+                          }`}
+                        >
+                          {l.status}
+                        </td>
+                        <td className="px-2 py-1 border border-primary/20 whitespace-pre-wrap wrap-break-word text-secondary">
+                          {l.timestamp
+                            ? new Date(l.timestamp).toLocaleTimeString()
+                            : ""}
+                        </td>
+                        <td className="px-2 py-1 border border-primary/20 whitespace-pre-wrap wrap-break-word text-secondary">
+                          {l.subject || ""}
+                        </td>
+                        <td className="px-2 py-1 border border-primary/20 text-secondary">
+                          {typeof l.attachments === "number"
+                            ? l.attachments
+                            : ""}
+                        </td>
+                        <td className="px-2 py-1 border border-primary/20 whitespace-pre-wrap wrap-break-word text-secondary">
+                          {l.error || l.messageId || ""}
+                        </td>
+                      </tr>
+                    ))}
+                    {isSending && sendModalLogs.length === 0 && (
+                      <tr>
+                        <td
+                          colSpan={6}
+                          className="px-2 py-4 text-center text-secondary"
+                        >
+                          Starting…
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
