@@ -2,18 +2,25 @@ import React from 'react';
 
 interface LoadingScreenProps {
   message: string;
-  colorTheme?: "primary" | "orange"; // Added color theme option
+  colorTheme?: "primary" | "orange" | "gold";
 }
 
-export const LoadingScreen = ({ message, colorTheme = "primary" }: LoadingScreenProps) => {
-  // Check which theme is selected
+export const LoadingScreen = ({ message, colorTheme = "gold" }: LoadingScreenProps) => {
   const isOrange = colorTheme === "orange";
-  
-  // Apply the correct Tailwind classes based on the theme
-  const textColor = isOrange ? "text-orange-500" : "text-primary";
-  const ringColor = isOrange ? "border-orange-500/20 border-t-orange-500" : "border-primary/20 border-t-primary";
-  const shadowGlow = isOrange ? "shadow-[0_0_30px_rgba(249,115,22,0.4)]" : "shadow-[0_0_30px_rgba(0,128,128,0.4)]";
-  const pulseColor = isOrange ? "bg-orange-500/20" : "bg-primary/20";
+  const isGold = colorTheme === "gold";
+
+  const textColor = isGold ? "text-[#c5a55a]" : isOrange ? "text-orange-500" : "text-primary";
+  const ringColor = isGold
+    ? "border-[#c5a55a]/20 border-t-[#c5a55a]"
+    : isOrange
+      ? "border-orange-500/20 border-t-orange-500"
+      : "border-primary/20 border-t-primary";
+  const shadowGlow = isGold
+    ? "shadow-[0_0_30px_rgba(197,165,90,0.4)]"
+    : isOrange
+      ? "shadow-[0_0_30px_rgba(249,115,22,0.4)]"
+      : "shadow-[0_0_30px_rgba(0,128,128,0.4)]";
+  const pulseColor = isGold ? "bg-[#c5a55a]/20" : isOrange ? "bg-orange-500/20" : "bg-primary/20";
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] w-full h-full text-center animate-in fade-in zoom-in-95 duration-500">
