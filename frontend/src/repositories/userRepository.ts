@@ -8,16 +8,13 @@ export async function findUserByEmail(email: string) {
 
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("users")
-    .select("users_id")
-    .ilike("email", normalizedEmail)
-    .limit(1);
+    .rpc("check_email_exists", { check_email: normalizedEmail });
 
   if (error) {
     throw new Error(`Failed to find user by email: ${error.message}`);
   }
 
-  return data?.[0] ?? null;
+  return data ? { users_id: "exists" } : null;
 }
 
 export async function getUserProfile(userId: string) {
