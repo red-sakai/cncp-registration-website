@@ -43,7 +43,7 @@ export default function CreateEventPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] text-white-100 relative isolate font-urbanist flex flex-col">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white-100 relative isolate font-urbanist flex flex-col">
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
 

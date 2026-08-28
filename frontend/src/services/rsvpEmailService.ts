@@ -24,7 +24,7 @@ async function loadRsvpTemplate() {
     process.cwd(),
     "public",
     "email-template",
-    "adph_rsvp.html",
+    "cncp_rsvp.html",
   );
 
   return await fs.readFile(templatePath, "utf8");
@@ -35,7 +35,7 @@ async function loadRegisteredTemplate() {
     process.cwd(),
     "public",
     "email-template",
-    "adph_registered.html",
+    "cncp_registered.html",
   );
 
   return await fs.readFile(templatePath, "utf8");

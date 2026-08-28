@@ -19,9 +19,9 @@ export default function ForgotPasswordForm() {
     <div
       className="
       relative overflow-hidden
-      bg-[rgba(255,255,255,0.03)]
+      bg-white/5
       backdrop-blur-md
-      border border-[rgba(255,255,255,0.15)]
+      border border-white/10
       rounded-[24px]
       p-8
       shadow-[0_8px_32px_rgba(0,0,0,0.4)]
@@ -41,7 +41,7 @@ export default function ForgotPasswordForm() {
         )}
 
         <div className="space-y-2">
-          <label className="text-[#9dd5d5] text-[11px] font-medium block">Email</label>
+          <label className="text-[#c5a55a] text-[11px] font-medium block">Email</label>
           <input
             name="email"
             type="email"
@@ -53,17 +53,17 @@ export default function ForgotPasswordForm() {
             disabled={isPending}
             className={`
               w-full
-              !bg-[rgba(15,30,30,0.9)]
+              !bg-[rgba(0,26,51,0.9)]
               border ${
-                focusedField === "email" ? "!border-[#7dc5c5]" : "!border-[#5da5a5]"
+                focusedField === "email" ? "!border-[#c5a55a]" : "!border-white/20"
               }
               rounded-xl
               px-4 py-3
-              !text-[#d5e5e5] text-sm
-              !placeholder:text-[rgba(197,213,213,0.5)]
+              !text-white text-sm
+              !placeholder:text-white/40
               outline-none
               transition-all duration-200
-              focus:!border-[#7dc5c5]
+              focus:!border-[#c5a55a]
               disabled:opacity-50 disabled:cursor-not-allowed
             `}
           />
@@ -74,9 +74,9 @@ export default function ForgotPasswordForm() {
           disabled={isPending}
           className="
             w-full
-            bg-[rgba(35,60,60,0.6)]
-            hover:bg-[rgba(35,60,60,0.7)]
-            text-[#95b5b5]
+            bg-[#049fd9]
+            hover:bg-[#0389b8]
+            text-white
             font-semibold
             py-3.5
             rounded-xl
@@ -98,8 +98,8 @@ export default function ForgotPasswordForm() {
         </button>
       </form>
 
-      <div className="mt-7 pt-6 border-t border-[rgba(139,197,197,0.15)]">
-        <p className="text-[rgba(165,197,197,0.6)] text-[10px] text-center font-medium">
+      <div className="mt-7 pt-6 border-t border-white/10">
+        <p className="text-white/40 text-[10px] text-center font-medium">
           We will send a secure, single-use reset link if your account exists.
         </p>
       </div>

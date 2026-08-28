@@ -5,7 +5,7 @@ export default function AdminLoginBackground() {
   return (
     <>
       {/* Base gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221]" />
       
       {/* Bokeh Background Effect */}
       <BokehBackground />

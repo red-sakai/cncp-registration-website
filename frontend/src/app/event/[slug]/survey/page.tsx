@@ -101,7 +101,7 @@ export default async function SurveyPage({ params }: PageProps) {
     : "";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-x-hidden">
       {!user && <SurveyAuthModal eventSlug={slug} />}
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
@@ -143,7 +143,7 @@ export default async function SurveyPage({ params }: PageProps) {
 
       {/* Footer / Copyright */}
       <footer className="relative z-10 text-center py-8 text-white/20 text-sm font-urbanist">
-        &copy; {new Date().getFullYear()} Arduino Day Philippines
+        &copy; {new Date().getFullYear()} Cisco NetConnect PUP - Manila
       </footer>
     </div>
   );

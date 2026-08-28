@@ -29,7 +29,7 @@ export default function Docs() {
 
       <h2 className="mt-8">Environment Variables</h2>
       <p>
-        BatchMail uses the Arduino Day Philippines sender credentials configured
+        BatchMail uses the Cisco NetConnect PUP - Manila sender credentials configured
         in the app environment.
       </p>
       <pre className="whitespace-pre-wrap break-word">
@@ -144,7 +144,7 @@ export default function Docs() {
       <h2 className="mt-8">Troubleshooting</h2>
       <ul>
         <li>
-          <strong>Missing env:</strong> Ensure the Arduino Day Philippines
+          <strong>Missing env:</strong> Ensure the Cisco NetConnect PUP - Manila
           sender keys exist in the app environment.
         </li>
         <li>

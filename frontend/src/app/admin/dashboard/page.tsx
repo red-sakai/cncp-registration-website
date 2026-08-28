@@ -104,7 +104,7 @@ export default function AdminDashboard() {
 
   if (loading || !role) {
     return (
-      <div className="min-h-screen bg-[#0a1520] flex items-center justify-center">
+      <div className="min-h-screen bg-[#001a33] flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
       </div>
     );
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
   const { stats, charts } = dashboardData;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] text-white relative overflow-hidden font-[family-name:var(--font-urbanist)]">
+    <div className="min-h-screen bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-hidden font-[family-name:var(--font-urbanist)]">
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
 

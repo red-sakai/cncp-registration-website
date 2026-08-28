@@ -126,7 +126,7 @@ const TAB_TUTORIALS: Record<TabId, StepConfig[]> = {
       selector: "#tutorial-env-controls",
       title: "Sender Environment",
       description:
-        "Sender uses the Arduino Day Philippines account configured in the app env.",
+        "Sender uses the Cisco NetConnect PUP - Manila account configured in the app env.",
       side: "bottom",
       align: "start",
     },
@@ -282,7 +282,7 @@ function PageInner() {
           <h1 className="text-3xl font-semibold tracking-tight flex items-center gap-3 text-primary font-urbanist">
             BatchMail{" "}
             <span className="keep-light-pill text-[12px] font-semibold px-2.5 py-1 rounded bg-white-100 text-slate-900 border border-slate-300 tracking-widest uppercase font-montserrat">
-              ADPH
+              CNCP
             </span>
           </h1>
           <p className="text-sm text-secondary">

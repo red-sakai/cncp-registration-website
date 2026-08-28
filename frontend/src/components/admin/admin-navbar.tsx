@@ -5,7 +5,6 @@ import { useState } from "react";
 import { logoutAction } from "@/actions/authActions";
 import { useUserStore } from "@/store/useUserStore";
 import { LogoutModal } from "./logout-modal";
-import { getLastViewedEventSlug } from "@/utils/last-viewed-event";
 
 interface AdminNavbarProps {
   activeTab: string;
@@ -47,8 +46,8 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
     try {
       await logoutAction();
       useUserStore.getState().clearUser();
-      const lastSlug = getLastViewedEventSlug();
-      router.push(lastSlug ? `/event/${lastSlug}` : "/");
+      localStorage.removeItem("lastViewedEventSlug");
+      router.push("/");
     } catch (error) {
       console.error("Logout failed:", error);
     } finally {
@@ -78,15 +77,15 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
           <div className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500/15 to-cyan-500/15 p-1.5 border border-cyan-500/20 flex-shrink-0">
               <Image
-                src="/images/logos/adph-logo.png"
-                alt="ADPH"
+                src="/images/logos/cncp-logo-transparent.png"
+                alt="Cisco NetConnect PUP - Manila"
                 fill
                 sizes="32px"
                 className="object-contain"
               />
             </div>
             <span className="text-xs font-medium text-gray-400 uppercase tracking-wider hidden sm:inline font-urbanist">
-              ADPH Admin
+              CNCP Admin
             </span>
           </div>
 
@@ -116,10 +115,10 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
 
         {/* Right Side - Actions */}
         <div className="flex items-center gap-3">
-          {/* Create Event Button - Elegant Premium */}
+          {/* Create Event Button - Cisco Blue */}
           <button
             onClick={handleCreateEvent}
-            className="hidden md:flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-gradient-to-br from-[#21935B] via-[#1a7549] to-[#145a39] hover:from-[#28a968] hover:via-[#21935B] hover:to-[#1a7549] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-300 border border-[#21935B]/30 hover:border-[#21935B]/50 group"
+            className="flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)] transition-all duration-300 border border-[#049fd9]/30 hover:border-[#049fd9]/50 group"
           >
             <Plus className="w-4 h-4 transition-transform group-hover:rotate-90 duration-300" />
             <span className="text-sm font-medium tracking-wide">
@@ -173,7 +172,7 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
               {/* Create New Event in Mobile Menu */}
               <button
                 onClick={handleCreateEvent}
-                className="w-full flex items-center gap-3 px-5 py-3.5 rounded-xl bg-gradient-to-br from-[#21935B] via-[#1a7549] to-[#145a39] hover:from-[#28a968] hover:via-[#21935B] hover:to-[#1a7549] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 border border-[#21935B]/30 hover:border-[#21935B]/50 mt-3"
+                className="w-full flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-all duration-300 border border-[#049fd9]/30 hover:border-[#049fd9]/50 mt-3"
               >
                 <Plus className="w-4 h-4" />
                 <span className="text-sm font-medium tracking-wide">

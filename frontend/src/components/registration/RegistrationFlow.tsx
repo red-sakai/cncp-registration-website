@@ -178,7 +178,7 @@ export function RegistrationFlow({
         totalSteps={totalSteps}
       >
         <div className="flex items-center justify-center h-full">
-          <p className="text-[rgba(197,213,213,0.8)] text-sm">Loading...</p>
+          <p className="text-white/60 text-sm">Loading...</p>
         </div>
       </RegistrationLayout>
     );
@@ -206,7 +206,7 @@ export function RegistrationFlow({
         totalSteps={totalSteps}
       >
         <div className="flex items-center justify-center h-full">
-          <p className="text-[rgba(197,213,213,0.8)] text-sm">
+          <p className="text-white/60 text-sm">
             Checking your registration...
           </p>
         </div>
@@ -224,7 +224,7 @@ export function RegistrationFlow({
           <h2 className="text-2xl sm:text-3xl font-bold text-[#f5f5f5] tracking-tight mb-2">
             You are already registered
           </h2>
-          <p className="text-[rgba(197,213,213,0.9)] max-w-sm mb-6 text-sm">
+                <p className="text-white/70 max-w-sm mb-6 text-sm">
             Your account already has a registration for this event.
           </p>
           <button
@@ -233,7 +233,7 @@ export function RegistrationFlow({
               router.refresh();
               router.push(eventSlug ? `/event/${eventSlug}?refresh=${Date.now()}` : "/");
             }}
-            className="px-6 py-3 bg-[rgba(35,60,60,0.6)] hover:bg-[rgba(35,60,60,0.7)] text-[#95b5b5] font-semibold rounded-xl transition-all duration-200 text-sm"
+            className="px-6 py-3 bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
           >
             Go Back to Event Page
           </button>
@@ -249,15 +249,15 @@ export function RegistrationFlow({
             totalSteps={totalSteps}
         >
             <div className="flex flex-col items-center justify-center h-full text-center animate-in zoom-in-95 duration-500">
-                <div className="w-24 h-24 bg-[rgba(93,216,216,0.15)] rounded-full flex items-center justify-center mb-6 border border-[#5da5a5]">
-                    <div className="w-16 h-16 bg-[#5dd8d8] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(93,216,216,0.5)]">
-                         <svg className="w-8 h-8 text-[#f5f5f5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-24 h-24 bg-[rgba(197,165,90,0.15)] rounded-full flex items-center justify-center mb-6 border border-[#c5a55a]/30">
+                    <div className="w-16 h-16 bg-[#c5a55a] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(197,165,90,0.5)]">
+                         <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#f5f5f5] tracking-tight mb-2">Registration successful!</h2>
-                <p className="text-[rgba(197,213,213,0.9)] max-w-sm mb-6 text-sm">
+          <p className="text-white/70 max-w-sm mb-6 text-sm">
                     Your spot has been secured.
                 </p>
                 <button
@@ -266,7 +266,7 @@ export function RegistrationFlow({
                       router.refresh();
                       router.push(eventSlug ? `/event/${eventSlug}?refresh=${Date.now()}` : "/");
                     }}
-                    className="px-6 py-3 bg-[rgba(35,60,60,0.6)] hover:bg-[rgba(35,60,60,0.7)] text-[#95b5b5] font-semibold rounded-xl transition-all duration-200 text-sm"
+                    className="px-6 py-3 bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
                 >
                     {eventSlug ? "Go Back to Event Page" : "Go to Home"}
                 </button>

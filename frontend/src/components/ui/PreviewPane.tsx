@@ -114,7 +114,7 @@ export default function PreviewPane({
     };
   }, []);
 
-  // Profiles removed from UI; sender env is fixed to Arduino Day Philippines.
+  // Profiles removed from UI; sender env is fixed to Cisco NetConnect PUP - Manila.
 
   // Attachment handling removed from PreviewPane (now in CSV tab).
 
@@ -283,7 +283,7 @@ export default function PreviewPane({
     [onSubjectChange, subjectTemplate]
   );
 
-  const variantLabel = "Arduino Day Philippines";
+  const variantLabel = "Cisco NetConnect PUP - Manila";
 
   const doSendEmails = useCallback(async () => {
     if (!ready || !csv || !mapping) return;
@@ -528,8 +528,8 @@ export default function PreviewPane({
                 {variantLabel}
               </span>
               <Image
-                src="/email-template/arduinoday.jpg"
-                alt="Arduino Day Philippines"
+                src="/email-template/cncp.jpg"
+                alt="Cisco NetConnect PUP - Manila"
                 width={32}
                 height={32}
                 className="h-6 w-6 rounded border"

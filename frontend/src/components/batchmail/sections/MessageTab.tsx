@@ -93,7 +93,7 @@ export default function MessageTab({
       <section className="rounded-lg border border-primary/20 bg-white p-4">
         <h2 className="text-lg font-semibold text-primary">Message</h2>
         <p className="text-xs text-secondary mb-2">
-          The message is injected into the ADPH template. New lines are preserved.
+          The message is injected into the CNCP template. New lines are preserved.
         </p>
         <textarea
           value={messageDraft}

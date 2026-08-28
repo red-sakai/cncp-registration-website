@@ -42,7 +42,7 @@ export const TAB_TUTORIALS: Record<TabId, StepConfig[]> = {
     {
       selector: "#tutorial-env-controls",
       title: "Sender Environment",
-      description: "Sender uses the Arduino Day Philippines account configured in the app env.",
+      description: "Sender uses the Cisco NetConnect PUP - Manila account configured in the app env.",
       side: "bottom",
       align: "start",
     },

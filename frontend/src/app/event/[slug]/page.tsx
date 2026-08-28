@@ -21,10 +21,7 @@ import { LocationMapPreview } from "@/components/event/location-map-preview";
 import { useEvent } from "@/hooks/event/use-event";
 import { getCurrentUserEmail } from "@/app/event/actions";
 
-import {
-  setLastViewedEventSlug,
-  getLastViewedEventSlug,
-} from "@/utils/last-viewed-event";
+import { setLastViewedEventSlug } from "@/utils/last-viewed-event";
 import { logoutAction } from "@/actions/authActions";
 import { getUserInfoAction } from "@/actions/userActions";
 import {
@@ -84,8 +81,8 @@ export default function EventPage() {
     try {
       await logoutAction();
       useUserStore.getState().clearUser();
-      const lastSlug = getLastViewedEventSlug();
-      router.replace(lastSlug ? `/event/${lastSlug}` : "/");
+      localStorage.removeItem("lastViewedEventSlug");
+      router.replace("/");
     } finally {
       setLoggingOut(false);
     }
@@ -210,7 +207,7 @@ export default function EventPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] text-white relative overflow-hidden font-montserrat">
+      <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-hidden font-montserrat">
         <BokehBackground />
         <Squares direction="diagonal" speed={0.3} />
         <div className="relative z-10 flex items-center justify-center min-h-screen">
@@ -231,7 +228,7 @@ export default function EventPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] text-white relative overflow-x-hidden font-montserrat">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-x-hidden font-montserrat">
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
 
@@ -242,7 +239,7 @@ export default function EventPage() {
             type="button"
             onClick={handleLogout}
             disabled={loggingOut}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[rgba(93,165,165,0.4)] bg-[rgba(15,30,30,0.6)] text-[#95b5b5] hover:bg-[rgba(35,60,60,0.6)] hover:text-[#9dd5d5] hover:border-[#5da5a5]/60 transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white hover:border-[#c5a55a]/50 transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <LogOut className="w-4 h-4" />
             {loggingOut ? "Logging out…" : "Logout"}

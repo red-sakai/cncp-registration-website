@@ -32,7 +32,7 @@ export function GuestAnswersModal({ guest, event, onClose }: GuestAnswersModalPr
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-3xl bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] border border-white/10 rounded-3xl max-h-[85vh] overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-3xl bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] border border-white/10 rounded-3xl max-h-[85vh] overflow-hidden flex flex-col">
         {/* Glow Effect */}
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50 pointer-events-none" />
 

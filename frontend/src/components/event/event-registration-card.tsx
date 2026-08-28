@@ -370,7 +370,7 @@ export function EventRegistrationCard({
         <div className="mt-3 text-center">
           <Link
             href={forgotPasswordHref}
-            className="text-[11px] text-[#80d7d7] hover:text-[#a2e6e6] underline-offset-4 hover:underline"
+            className="text-[11px] text-[#c5a55a] hover:text-[#d4b96a] underline-offset-4 hover:underline"
           >
             Forgot Password?
           </Link>

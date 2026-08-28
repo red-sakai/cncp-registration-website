@@ -16,7 +16,6 @@ import Squares from "@/components/create-event/squares-background";
 import { logoutAction } from "@/actions/authActions";
 import { getMyEventsAction } from "@/actions/registrantActions";
 import { useUserStore } from "@/store/useUserStore";
-import { getLastViewedEventSlug } from "@/utils/last-viewed-event";
 
 type MyEvent = {
   registrant_id: string;
@@ -96,15 +95,15 @@ export default function MyEventsPage() {
     try {
       await logoutAction();
       useUserStore.getState().clearUser();
-      const lastSlug = getLastViewedEventSlug();
-      router.replace(lastSlug ? `/event/${lastSlug}` : "/");
+      localStorage.removeItem("lastViewedEventSlug");
+      router.replace("/");
     } finally {
       setLoggingOut(false);
     }
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a1f14] via-[#0a1520] to-[#120c08] text-white relative overflow-x-hidden font-urbanist">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-x-hidden font-urbanist">
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
 
@@ -120,7 +119,7 @@ export default function MyEventsPage() {
             type="button"
             onClick={handleLogout}
             disabled={loggingOut}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[rgba(93,165,165,0.4)] bg-[rgba(15,30,30,0.6)] text-[#95b5b5] hover:bg-[rgba(35,60,60,0.6)] hover:text-[#9dd5d5] hover:border-[#5da5a5]/60 transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white hover:border-[#c5a55a]/50 transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <LogOut className="w-4 h-4" />
             {loggingOut ? "Logging out..." : "Logout"}
@@ -149,7 +148,7 @@ export default function MyEventsPage() {
               <button
                 type="button"
                 onClick={() => router.push("/")}
-                className="px-5 py-2.5 bg-[#5da5a5]/20 hover:bg-[#5da5a5]/30 border border-[#5da5a5]/40 rounded-xl text-[#9dd5d5] text-sm font-medium transition-colors"
+                className="px-5 py-2.5 bg-[#c5a55a]/20 hover:bg-[#c5a55a]/30 border border-[#c5a55a]/40 rounded-xl text-[#c5a55a] text-sm font-medium transition-colors"
               >
                 Go to Home
               </button>
@@ -168,7 +167,7 @@ export default function MyEventsPage() {
                     onClick={() => router.push(`/event/${ev.slug}`)}
                     className="group text-left bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-200 hover:bg-black/50"
                   >
-                    <div className="relative h-40 bg-gradient-to-br from-[#0a1f14] to-[#0a1520] overflow-hidden">
+                    <div className="relative h-40 bg-gradient-to-br from-[#001a33] to-[#002d52] overflow-hidden">
                       {ev.cover_image ? (
                         <Image
                           src={ev.cover_image}

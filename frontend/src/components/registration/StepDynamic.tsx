@@ -74,7 +74,7 @@ export function StepDynamic({
             <h2 className="text-xl sm:text-2xl font-bold text-[#f5f5f5] tracking-tight mb-2 leading-tight">
               Additional Information
             </h2>
-            <p className="text-[rgba(197,213,213,0.8)] mb-6 sm:mb-8 ml-1 text-[11px] sm:text-sm">
+            <p className="text-white/60 mb-6 sm:mb-8 ml-1 text-[11px] sm:text-sm">
               Please provide the following information
             </p>
           </div>
@@ -86,10 +86,10 @@ export function StepDynamic({
               
               return (
                 <div key={question.id} className="space-y-2">
-                  <label className="text-[#9dd5d5] text-[11px] font-medium block">
+                  <label className="text-[#c5a55a] text-[11px] font-medium block">
                     {question.text}
                     {question.required && (
-                      <span className="text-[#5dd8d8] ml-1">*</span>
+                      <span className="text-[#c5a55a] ml-1">*</span>
                     )}
                   </label>
 
@@ -101,7 +101,7 @@ export function StepDynamic({
                       onChange={(e) => updateAnswer(question.id, e.target.value)}
                       required={question.required}
                       placeholder="Type your answer here..."
-                      className={`w-full !bg-[rgba(15,30,30,0.9)] border ${error ? 'border-red-500' : 'border-[#5da5a5]'} rounded-xl px-4 py-3 !text-[#d5e5e5] text-sm !placeholder:text-[rgba(197,213,213,0.5)] outline-none transition-all duration-200 focus:border-[#7dc5c5] focus:outline-none`}
+                      className={`w-full !bg-[rgba(0,26,51,0.9)] border ${error ? 'border-red-500' : 'border-white/20'} rounded-xl px-4 py-3 !text-white text-sm !placeholder:text-white/40 outline-none transition-all duration-200 focus:border-[#c5a55a] focus:outline-none`}
                     />
                   )}
 
@@ -111,7 +111,7 @@ export function StepDynamic({
                       {question.options.map((option, index) => (
                         <label
                           key={index}
-                          className="flex items-center gap-3 p-3 rounded-lg bg-[rgba(15,30,30,0.6)] border border-[#5da5a5]/30 hover:border-[#7dc5c5]/50 cursor-pointer transition-all"
+                          className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 hover:border-[#c5a55a]/50 cursor-pointer transition-all"
                         >
                           <input
                             type="radio"
@@ -120,9 +120,9 @@ export function StepDynamic({
                             checked={(formData.dynamicAnswers[question.id.toString()] as string) === option}
                             onChange={(e) => updateAnswer(question.id, e.target.value)}
                             required={question.required}
-                            className="w-4 h-4 text-[#7dc5c5] bg-[rgba(15,30,30,0.9)] border-[#5da5a5] focus:ring-[#7dc5c5] focus:ring-offset-0"
+                            className="w-4 h-4 text-[#c5a55a] bg-[rgba(0,26,51,0.9)] border-white/20 focus:ring-[#c5a55a] focus:ring-offset-0"
                           />
-                          <span className="text-[#d5e5e5] text-sm">{option}</span>
+                          <span className="text-white text-sm">{option}</span>
                         </label>
                       ))}
                     </div>
@@ -134,7 +134,7 @@ export function StepDynamic({
                       value={(formData.dynamicAnswers[question.id.toString()] as string) || ''}
                       onChange={(e) => updateAnswer(question.id, e.target.value)}
                       required={question.required}
-                      className={`w-full !bg-[rgba(15,30,30,0.9)] border ${error ? 'border-red-500' : 'border-[#5da5a5]'} rounded-xl px-4 py-3 !text-[#d5e5e5] text-sm outline-none transition-all duration-200 focus:border-[#7dc5c5] focus:outline-none cursor-pointer`}
+                      className={`w-full !bg-[rgba(0,26,51,0.9)] border ${error ? 'border-red-500' : 'border-white/20'} rounded-xl px-4 py-3 !text-white text-sm outline-none transition-all duration-200 focus:border-[#c5a55a] focus:outline-none cursor-pointer`}
                     >
                       <option value="" disabled>
                         Select an option...
@@ -160,10 +160,10 @@ export function StepDynamic({
                           }
                         }}
                         required={question.required && !formData.dynamicAnswers[question.id.toString()]}
-                        className="w-full !bg-[rgba(15,30,30,0.9)] border border-[#5da5a5] rounded-xl px-4 py-3 !text-[#d5e5e5] text-sm outline-none transition-all duration-200 focus:border-[#7dc5c5] focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#5da5a5]/20 file:text-[#9dd5d5] hover:file:bg-[#5da5a5]/30 file:cursor-pointer"
+                        className="w-full !bg-[rgba(0,26,51,0.9)] border border-white/20 rounded-xl px-4 py-3 !text-white text-sm outline-none transition-all duration-200 focus:border-[#c5a55a] focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#c5a55a]/20 file:text-[#c5a55a] hover:file:bg-[#c5a55a]/30 file:cursor-pointer"
                       />
                       <div className="flex items-center justify-between mt-1">
-                        <p className="text-[rgba(197,213,213,0.6)] text-xs ml-1">
+                        <p className="text-white/40 text-xs ml-1">
                           Only PDF files accepted
                         </p>
                         {formData.dynamicAnswers[question.id.toString()] instanceof File && (
@@ -188,17 +188,17 @@ export function StepDynamic({
         </div>
       </div>
 
-      <div className="mt-6 sm:mt-8 flex gap-3 sm:gap-4 pt-4 border-t border-[rgba(139,197,197,0.15)]">
+      <div className="mt-6 sm:mt-8 flex gap-3 sm:gap-4 pt-4 border-t border-white/10">
         <button
           type="button"
           onClick={onBack}
-          className="flex-1 py-3.5 rounded-xl border border-[rgba(139,197,197,0.4)] hover:bg-[rgba(20,40,40,0.9)] text-[#95b5b5] font-semibold text-sm transition-all duration-200"
+          className="flex-1 py-3.5 rounded-xl border border-white/20 hover:bg-white/5 text-white/70 font-semibold text-sm transition-all duration-200"
         >
           Back
         </button>
         <button
           type="submit"
-          className="flex-1 py-3.5 rounded-xl bg-[rgba(35,60,60,0.6)] hover:bg-[rgba(35,60,60,0.7)] text-[#95b5b5] font-semibold text-sm transition-all duration-200"
+          className="flex-1 py-3.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold text-sm transition-all duration-200"
         >
           Continue
         </button>

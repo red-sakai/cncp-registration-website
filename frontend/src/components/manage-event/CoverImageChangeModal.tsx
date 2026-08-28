@@ -83,7 +83,7 @@ export function CoverImageChangeModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div className="bg-gradient-to-br from-[#0a1f14] to-[#120c08] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl relative">
+      <div className="bg-gradient-to-br from-[#001a33] to-[#001221] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl relative">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/10">
           <h2 className="font-urbanist text-xl md:text-2xl font-bold text-white">

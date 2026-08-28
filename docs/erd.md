@@ -1,8 +1,8 @@
 # Entity Relationship Diagram
 
-## Arduino Day Philippines Registration System
+## Cisco NetConnect PUP - Manila Registration System
 
-This document presents the Entity Relationship Diagram for the Arduino Day Philippines Registration System.
+This document presents the Entity Relationship Diagram for the Cisco NetConnect PUP - Manila Registration System.
 
 ---
 
@@ -77,7 +77,7 @@ erDiagram
 
 ### REGISTRANT
 
-The main entity representing individuals who register for Arduino Day Philippines activities.
+The main entity representing individuals who register for Cisco NetConnect PUP - Manila activities.
 
 | Attribute                  | Type         | Description                                                                                                         |
 | -------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------- |
@@ -102,7 +102,7 @@ The main entity representing individuals who register for Arduino Day Philippine
 
 ### SECTION
 
-Represents different sections or tracks within Arduino Day Philippines.
+Represents different sections or tracks within Cisco NetConnect PUP - Manila.
 
 | Attribute   | Type         | Description                                              |
 | ----------- | ------------ | -------------------------------------------------------- |
@@ -113,7 +113,7 @@ Represents different sections or tracks within Arduino Day Philippines.
 
 ### ACTIVITY
 
-Represents specific activities within sections of Arduino Day Philippines.
+Represents specific activities within sections of Cisco NetConnect PUP - Manila.
 
 | Attribute   | Type         | Description                    |
 | ----------- | ------------ | ------------------------------ |
@@ -138,7 +138,7 @@ Junction table linking registrants to activities they've registered for.
 
 ### PARTNERED_ORGANIZATION
 
-Organizations partnered with Arduino Day Philippines. Each organization has a specific section and location. **Note**: Membership in a partnered organization is optional for registrants. Not all registrants need to be affiliated with a partnered organization.
+Organizations partnered with Cisco NetConnect PUP - Manila. Each organization has a specific section and location. **Note**: Membership in a partnered organization is optional for registrants. Not all registrants need to be affiliated with a partnered organization.
 
 | Attribute   | Type         | Description                            |
 | ----------- | ------------ | -------------------------------------- |
@@ -288,5 +288,5 @@ Organizations partnered with Arduino Day Philippines. Each organization has a sp
 
 ---
 
-_Document generated for Arduino Day Philippines 2026_
+_Document generated for Cisco NetConnect PUP - Manila 2026_
 _Last updated: January 2026_

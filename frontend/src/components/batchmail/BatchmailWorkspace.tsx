@@ -88,7 +88,7 @@ export default function BatchmailWorkspace({ guests }: BatchmailWorkspaceProps) 
 
   useEffect(() => {
     let active = true;
-    fetch("/email-template/adph.html")
+    fetch("/email-template/cncp.html")
       .then((res) => res.text())
       .then((html) => {
         if (!active) return;
@@ -213,7 +213,7 @@ export default function BatchmailWorkspace({ guests }: BatchmailWorkspaceProps) 
           }}
           getDisabledTitle={(id) => {
             if (id === "preview" && (!csv || !mapping)) return "Add guests first to preview or send.";
-            if (id === "preview" && !templateReady) return "Loading the ADPH template.";
+            if (id === "preview" && !templateReady) return "Loading the CNCP template.";
             return undefined;
           }}
           onChange={(id) => {

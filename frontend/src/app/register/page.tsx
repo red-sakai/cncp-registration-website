@@ -21,18 +21,18 @@ export default async function RegisterPage({
         <div className="text-center mb-10 space-y-3">
           <div className="inline-block mb-4">
             <Image
-              src="/images/logos/adph-logo.png"
-              alt="Arduino Day Philippines"
+              src="/images/logos/cncp-logo-transparent.png"
+              alt="Cisco NetConnect PUP - Manila"
               width={96}
               height={96}
               className="opacity-95"
             />
           </div>
-          <h1 className="text-[40px] sm:text-[48px] md:text-[56px] font-bold text-[#f5f5f5] tracking-tight leading-none">
+          <h1 className="text-[40px] sm:text-[48px] md:text-[56px] font-bold text-white tracking-tight leading-none">
             Sign Up
           </h1>
-          <p className="text-[#5dd8d8] text-[11px] tracking-[0.3em] uppercase font-semibold">
-            Arduino Day Philippines 2026
+          <p className="text-[#c5a55a] text-[11px] tracking-[0.3em] uppercase font-semibold">
+            Cisco NetConnect PUP - Manila
           </p>
         </div>
 
@@ -40,19 +40,19 @@ export default async function RegisterPage({
         <UserRegisterForm nextUrl={nextUrl} />
 
         {/* Sign in link */}
-        <p className="mt-4 text-center text-[11px] text-[rgba(200,230,230,0.75)]">
+        <p className="mt-4 text-center text-[11px] text-white/50">
           Already have an account?{" "}
           <Link
             href="/"
-            className="text-[#6dd8d8] hover:text-[#8de5e5] underline-offset-4 hover:underline font-medium"
+            className="text-[#c5a55a] hover:text-[#d4b96a] underline-offset-4 hover:underline font-medium"
           >
             Sign In
           </Link>
         </p>
 
         {/* Bottom Text */}
-        <p className="text-[rgba(255,255,255,0.25)] text-[10px] text-center mt-5 font-medium">
-          Powered by Arduino Community Philippines
+        <p className="text-white/25 text-[10px] text-center mt-5 font-medium">
+          Powered by Cisco NetConnect PUP - Manila
         </p>
       </div>
     </div>

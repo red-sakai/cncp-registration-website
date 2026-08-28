@@ -23,12 +23,12 @@ export function RegistrationLayout({
         </div>
 
         {/* Form Card - same as login/register */}
-        <div className="animate-fade-in animate-delay-200 relative overflow-hidden bg-[rgba(255,255,255,0.03)] backdrop-blur-md border border-[rgba(255,255,255,0.15)] rounded-[24px] p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <div className="animate-fade-in animate-delay-200 relative overflow-hidden bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           {children}
         </div>
 
-        <p className="text-[rgba(255,255,255,0.25)] text-[10px] text-center font-medium">
-          Powered by Arduino Community Philippines
+        <p className="text-white/25 text-[10px] text-center font-medium">
+          Powered by Cisco NetConnect PUP - Manila
         </p>
       </main>
     </div>

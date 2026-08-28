@@ -257,7 +257,7 @@ import RegistrationForm from '@/components/forms/RegistrationForm';
 export default function EventsPage() {
   return (
     <div>
-      <EventCard title="Arduino Day 2026" date="March 27, 2026" />
+      <EventCard title="Cisco NetConnect 2026" date="March 27, 2026" />
       <RegistrationForm />
     </div>
   );

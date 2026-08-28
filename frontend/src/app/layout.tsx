@@ -20,10 +20,10 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "Arduino Day Philippines 2026",
-  description: "Arduino Day Philippines 2026 Registration and Event Management",
+  title: "Cisco NetConnect PUP - Manila",
+  description: "Cisco NetConnect PUP - Manila Registration and Event Management",
   icons: {
-    icon: "/images/logos/adph-logo.png",
+    icon: "/images/logos/cncp-logo-transparent.png",
   },
 };
 
