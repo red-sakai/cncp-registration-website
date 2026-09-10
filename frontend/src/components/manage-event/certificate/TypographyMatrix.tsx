@@ -15,7 +15,7 @@ export function TypographyMatrix({
   return (
     <div className="bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 space-y-6">
       <h3 className="text-xl font-bold text-white flex items-center gap-2 font-urbanist border-b border-white/10 pb-4">
-        <Type className="text-cyan-400" size={20} /> Typography Matrix
+        <Type className="text-violet-400" size={20} /> Typography Matrix
       </h3>
 
       <div className="space-y-3">
@@ -43,7 +43,7 @@ export function TypographyMatrix({
                 text: { ...config.text, color: e.target.value },
               })
             }
-            className="flex-1 bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white font-mono text-base uppercase focus:border-cyan-500 focus:outline-none transition-colors"
+            className="flex-1 bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white font-mono text-base uppercase focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
       </div>
@@ -73,7 +73,7 @@ export function TypographyMatrix({
                 },
               });
             }}
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           >
             <option value={400} className="bg-slate-900">
               Regular
@@ -107,7 +107,7 @@ export function TypographyMatrix({
                 },
               });
             }}
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           >
             <option value="normal" className="bg-slate-900">
               Normal
@@ -135,7 +135,7 @@ export function TypographyMatrix({
                     },
                   })
                 }
-                className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+                className="text-white/30 hover:text-violet-400 p-1 transition-all"
               >
                 <RotateCcw size={14} />
               </button>
@@ -153,7 +153,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
           <p className="text-xs text-white/40 font-urbanist leading-relaxed pt-1">
             Ideal font size.
@@ -175,7 +175,7 @@ export function TypographyMatrix({
                   },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -192,7 +192,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
           <p className="text-xs text-white/40 font-urbanist leading-relaxed pt-1">
             Names longer than this will visually shrink.
@@ -215,7 +215,7 @@ export function TypographyMatrix({
                   },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -232,7 +232,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
         <div className="space-y-3">
@@ -249,7 +249,7 @@ export function TypographyMatrix({
                   },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -266,7 +266,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
       </div>
@@ -283,7 +283,7 @@ export function TypographyMatrix({
                   text: { ...config.text, x: DEFAULT_CONFIG.text.x },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -300,7 +300,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
         <div className="space-y-3">
@@ -314,7 +314,7 @@ export function TypographyMatrix({
                   text: { ...config.text, y: DEFAULT_CONFIG.text.y },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -331,7 +331,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
       </div>
@@ -351,7 +351,7 @@ export function TypographyMatrix({
                   },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -368,7 +368,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
         <div className="space-y-3">
@@ -385,7 +385,7 @@ export function TypographyMatrix({
                   },
                 })
               }
-              className="text-white/30 hover:text-cyan-400 p-1 transition-all"
+              className="text-white/30 hover:text-violet-400 p-1 transition-all"
             >
               <RotateCcw size={14} />
             </button>
@@ -402,7 +402,7 @@ export function TypographyMatrix({
                 },
               })
             }
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-500 focus:outline-none transition-colors"
+            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-violet-500 focus:outline-none transition-colors"
           />
         </div>
       </div>

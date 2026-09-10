@@ -11,7 +11,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
     pending: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
     cancelled: 'bg-red-500/10 text-red-500 border-red-500/20',
     completed: 'bg-red-500/10 text-red-500 border-red-500/20',
-    active: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
+    active: 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20',
   };
   
   const icons = {

@@ -10,9 +10,9 @@ declare module "tailwindcss/types/config" {
 }
 
 const globalColors = {
-  primary: "#049fd9",
-  secondary: "#00bceb",
-  accent: "#005073",
+  primary: "#8b5cf6",
+  secondary: "#a78bfa",
+  accent: "#6d28d9",
   white: {
     DEFAULT: "#FFFFFF",
     50: "#E8E8EA",
@@ -40,14 +40,14 @@ export default {
         "geist-mono": ["var(--font-geist-mono)", "monospace"],
       },
       backgroundImage: {
-        "gradient-hover": `linear-gradient(130deg, ${globalColors.primary} 0%, #33b5e5 44%, #66ccf0 77%, #7dd3f5 100%)`,
+        "gradient-hover": `linear-gradient(130deg, ${globalColors.primary} 0%, #a78bfa 44%, #c4b5fd 77%, #ddd6fe 100%)`,
         "gradient-clicked":
-          "linear-gradient(135deg, #33b5e5 4%, #E2ECED 78%, #7dd3f5 100%)",
-        "gradient-border-default": `linear-gradient(0deg, ${globalColors.primary} 0%, #66d4ff 63%, #FFFFFF 100%)`,
+          "linear-gradient(135deg, #a78bfa 4%, #E2ECED 78%, #ddd6fe 100%)",
+        "gradient-border-default": `linear-gradient(0deg, ${globalColors.primary} 0%, #c4b5fd 63%, #FFFFFF 100%)`,
         "gradient-border-active": `linear-gradient(0deg, #F8F7FC 0%, ${globalColors.accent} 100%)`,
         "gradient-border-transparent":
           "linear-gradient(180deg, #D6EAEA 24%, #1A1A1C 100%)",
-        "gradient-cta": `linear-gradient(90deg, #F8F7FC 0%, #049fd9 35.5%, #00bceb 68.5%, #F8F7FC 100%)`,
+        "gradient-cta": `linear-gradient(90deg, #F8F7FC 0%, #8b5cf6 35.5%, #a78bfa 68.5%, #F8F7FC 100%)`,
       },
       fontSize: {
         xs: ["11.1px", { letterSpacing: "0.005em" }],

@@ -207,7 +207,7 @@ export default function EventPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-hidden font-montserrat">
+      <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0015] via-[#1a0533] to-[#0d1137] text-white relative overflow-hidden font-montserrat">
         <BokehBackground />
         <Squares direction="diagonal" speed={0.3} />
         <div className="relative z-10 flex items-center justify-center min-h-screen">
@@ -228,7 +228,7 @@ export default function EventPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-x-hidden font-montserrat">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0015] via-[#1a0533] to-[#0d1137] text-white relative overflow-x-hidden font-montserrat">
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
 
@@ -279,7 +279,7 @@ export default function EventPage() {
             >
               <Link
                 href={breadcrumbParent.href}
-                className="text-cyan-300/80 hover:text-cyan-200 transition-colors"
+                className="text-violet-300/80 hover:text-violet-200 transition-colors"
               >
                 {breadcrumbParent.label}
               </Link>

@@ -438,7 +438,7 @@ export function QRScannerModal({
               onClick={() => setActiveTab("scanner")}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                 activeTab === "scanner"
-                  ? "bg-cyan-500/20 text-cyan-300"
+                  ? "bg-violet-500/20 text-violet-300"
                   : "text-white/70 hover:text-white"
               }`}
             >
@@ -448,7 +448,7 @@ export function QRScannerModal({
               onClick={() => setActiveTab("manual")}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                 activeTab === "manual"
-                  ? "bg-cyan-500/20 text-cyan-300"
+                  ? "bg-violet-500/20 text-violet-300"
                   : "text-white/70 hover:text-white"
               }`}
             >
@@ -482,7 +482,7 @@ export function QRScannerModal({
                   value={manualSearch}
                   onChange={(e) => setManualSearch(e.target.value)}
                   placeholder="Search by name..."
-                  className="w-full pl-10 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-cyan-400"
+                  className="w-full pl-10 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-violet-400"
                 />
               </div>
 
@@ -609,7 +609,7 @@ export function QRScannerModal({
                                 {guest.qr_data ? (
                                   <button
                                     onClick={() => void handlePreviewQr(guest)}
-                                    className="p-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 transition-colors"
+                                    className="p-1.5 rounded-lg border border-violet-500/30 bg-violet-500/10 text-violet-300 hover:bg-violet-500/20 transition-colors"
                                     title="Preview QR"
                                   >
                                     <QrCode className="w-4 h-4" />

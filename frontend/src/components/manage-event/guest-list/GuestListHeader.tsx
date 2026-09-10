@@ -24,7 +24,7 @@ export function GuestListHeader({ guestCount, onExport, onCheckIn }: GuestListHe
       <button
         onClick={onExport}
         disabled={guestCount === 0}
-        className="font-urbanist px-4 py-2 bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm font-medium transition-colors flex items-center gap-2 whitespace-nowrap"
+        className="font-urbanist px-4 py-2 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm font-medium transition-colors flex items-center gap-2 whitespace-nowrap"
       >
         <Download size={16} />
         Export CSV

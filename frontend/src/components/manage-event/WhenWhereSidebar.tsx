@@ -54,7 +54,7 @@ export function WhenWhereSidebar({ event }: WhenWhereSidebarProps) {
 
           {event.location ? (
             <div className="flex gap-3 items-start p-4 bg-white/5 border border-white/10 rounded-lg">
-              <MapPin size={20} className="text-cyan-500 flex-shrink-0 mt-0.5" />
+              <MapPin size={20} className="text-violet-500 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-white font-medium text-sm mb-1">Location</p>
                 <p className="text-white/60 text-xs">
@@ -63,8 +63,8 @@ export function WhenWhereSidebar({ event }: WhenWhereSidebarProps) {
               </div>
             </div>
           ) : (
-            <div className="flex gap-3 items-start p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
-              <AlertTriangle size={20} className="text-cyan-500 flex-shrink-0 mt-0.5" />
+            <div className="flex gap-3 items-start p-4 bg-violet-500/10 border border-violet-500/20 rounded-lg">
+              <AlertTriangle size={20} className="text-violet-500 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-white font-medium text-sm mb-1">Location Missing</p>
                 <p className="text-white/60 text-xs">

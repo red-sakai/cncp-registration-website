@@ -16,7 +16,7 @@ export default function EventRegisterPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-hidden font-urbanist">
+      <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0015] via-[#1a0533] to-[#0d1137] text-white relative overflow-hidden font-urbanist">
         <BokehBackground />
         <Squares direction="diagonal" speed={0.3} />
         <div className="relative z-10 flex items-center justify-center min-h-screen">

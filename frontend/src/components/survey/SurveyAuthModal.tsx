@@ -41,8 +41,8 @@ export function SurveyAuthModal({ eventSlug }: SurveyAuthModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="bg-[#0f1d24] border border-white/10 rounded-2xl w-full max-w-md p-6 sm:p-8 shadow-2xl relative">
         <div className="text-center space-y-4">
-          <div className="mx-auto w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center mb-4">
-            <LogIn className="w-6 h-6 text-cyan-400" />
+          <div className="mx-auto w-12 h-12 bg-violet-500/10 rounded-full flex items-center justify-center mb-4">
+            <LogIn className="w-6 h-6 text-violet-400" />
           </div>
 
           <h2 className="font-urbanist text-2xl font-bold text-white">
@@ -57,7 +57,7 @@ export function SurveyAuthModal({ eventSlug }: SurveyAuthModalProps) {
           <div className="pt-6 space-y-3">
             <button
               onClick={handleLogin}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-white rounded-xl font-semibold transition-all shadow-lg hover:shadow-cyan-500/25"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-500 to-violet-500 hover:from-teal-400 hover:to-violet-400 text-white rounded-xl font-semibold transition-all shadow-lg hover:shadow-violet-500/25"
             >
               <LogIn className="w-4 h-4" />
               Sign in to continue

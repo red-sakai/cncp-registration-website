@@ -51,7 +51,7 @@ export function PreviewPanel({
       
       {/* Live Preview Input + Generate Preview Button */}
       <div className="mb-4 bg-black/40 border border-white/10 rounded-xl p-3 flex items-center gap-3">
-        <Keyboard size={18} className="text-cyan-400" />
+        <Keyboard size={18} className="text-violet-400" />
         <input
           type="text"
           value={previewName}
@@ -65,13 +65,13 @@ export function PreviewPanel({
           placeholder="Type a name to test font scaling..."
           className="bg-transparent flex-1 text-white font-urbanist text-sm focus:outline-none"
         />
-        <span className="text-xs font-mono text-cyan-400/50 bg-cyan-400/10 px-2 py-1 rounded">
+        <span className="text-xs font-mono text-violet-400/50 bg-violet-400/10 px-2 py-1 rounded">
           {getSmartFontSize(previewName.length, config.text)}px
         </span>
         <button
           onClick={handleGeneratePreview}
           disabled={isRenderingPreview || !config.templateUrl}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/40 border border-cyan-500/30 text-cyan-300 rounded-lg text-xs font-bold transition-all disabled:opacity-40 whitespace-nowrap"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-500/20 hover:bg-violet-500/40 border border-violet-500/30 text-violet-300 rounded-lg text-xs font-bold transition-all disabled:opacity-40 whitespace-nowrap"
         >
           {isRenderingPreview ? (
             <Loader2 size={13} className="animate-spin" />
@@ -91,7 +91,7 @@ export function PreviewPanel({
       ) : (
         <div
           ref={containerRef}
-          className="relative aspect-[1.414/1] w-full bg-black rounded-xl overflow-hidden select-none shadow-2xl border border-cyan-500/10"
+          className="relative aspect-[1.414/1] w-full bg-black rounded-xl overflow-hidden select-none shadow-2xl border border-violet-500/10"
           onMouseMove={(e) => {
             if (!isDragging || !containerRef.current) return;
             const rect = containerRef.current.getBoundingClientRect();
@@ -153,7 +153,7 @@ export function PreviewPanel({
 
           {/* Draggable bounding box — always overlaid on top */}
           <div
-            className="absolute border-2 border-cyan-400 bg-cyan-400/10 shadow-[0_0_15px_rgba(34,211,238,0.4)] cursor-move group"
+            className="absolute border-2 border-violet-400 bg-violet-400/10 shadow-[0_0_15px_rgba(34,211,238,0.4)] cursor-move group"
             style={getRenderStyle()}
             onMouseDown={(e) => {
               e.stopPropagation();

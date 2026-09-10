@@ -275,7 +275,7 @@ export function GuestListSection({
               </span>
               {" | "}
               Remaining:{" "}
-              <span className="text-cyan-300">
+              <span className="text-violet-300">
                 {
                   statusQueueItems.filter(
                     (item) =>
@@ -306,7 +306,7 @@ export function GuestListSection({
                               : item.status === "error"
                                 ? "border-rose-400/40 text-rose-300"
                                 : item.status === "updating"
-                                  ? "border-cyan-400/40 text-cyan-300"
+                                  ? "border-violet-400/40 text-violet-300"
                                   : "border-white/20 text-white/70"
                           }`}
                         >
@@ -395,7 +395,7 @@ export function GuestListSection({
                   )
                 }
                 disabled={isBusy}
-                className="font-urbanist px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 disabled:opacity-50 cursor-pointer"
+                className="font-urbanist px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 disabled:opacity-50 cursor-pointer"
               >
                 <option
                   value="registered"
@@ -416,7 +416,7 @@ export function GuestListSection({
               <button
                 onClick={() => setShowBulkConfirm(true)}
                 disabled={isBusy}
-                className="font-urbanist px-4 py-1.5 bg-cyan-600/80 hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm font-medium transition-colors"
+                className="font-urbanist px-4 py-1.5 bg-violet-600/80 hover:bg-violet-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm font-medium transition-colors"
               >
                 Apply
               </button>

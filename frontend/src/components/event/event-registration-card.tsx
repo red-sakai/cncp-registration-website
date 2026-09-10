@@ -275,7 +275,7 @@ export function EventRegistrationCard({
             <button
               onClick={handleDownloadTicket}
               disabled={downloadingTicket}
-              className="w-full inline-flex items-center justify-center gap-2 text-sm font-bold px-4 py-3 rounded-lg bg-blue-600 text-white hover:shadow-lg transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full inline-flex items-center justify-center gap-2 text-sm font-bold px-4 py-3 rounded-lg bg-indigo-600 text-white hover:shadow-lg transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {downloadingTicket ? (
                 <Loader2 size={16} className="animate-spin" />
@@ -326,7 +326,7 @@ export function EventRegistrationCard({
       isGoing === true &&
       generatingQRCode &&
       !qrCodeUrl ? (
-        <div className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 text-sm text-cyan-200 inline-flex items-center gap-2">
+        <div className="rounded-lg border border-violet-500/30 bg-violet-500/10 px-4 py-3 text-sm text-violet-200 inline-flex items-center gap-2">
           <Loader2 size={16} className="animate-spin" />
           Generating your QR code...
         </div>

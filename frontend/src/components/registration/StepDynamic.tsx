@@ -198,7 +198,7 @@ export function StepDynamic({
         </button>
         <button
           type="submit"
-          className="flex-1 py-3.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold text-sm transition-all duration-200"
+          className="flex-1 py-3.5 rounded-xl bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold text-sm transition-all duration-200"
         >
           Continue
         </button>

@@ -149,7 +149,7 @@ export default function SurveyForm({
     return (
       <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-sm shadow-xl text-center">
-          <div className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-cyan-400 border border-cyan-500/30">
+          <div className="w-16 h-16 bg-violet-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-violet-400 border border-violet-500/30">
             <Check className="w-8 h-8" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-2 font-urbanist">
@@ -161,7 +161,7 @@ export default function SurveyForm({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <button
               onClick={() => setIsEditing(true)}
-              className="w-full sm:w-auto px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-cyan-500/20 font-urbanist"
+              className="w-full sm:w-auto px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-violet-500/20 font-urbanist"
             >
               Edit Response
             </button>
@@ -180,11 +180,11 @@ export default function SurveyForm({
 
         {certificateBase64 && (
           <div className="mb-8 sm:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h3 className="text-xl sm:text-2xl font-bold text-cyan-400 mb-6 font-urbanist flex items-center justify-center gap-2 text-center">
+            <h3 className="text-xl sm:text-2xl font-bold text-violet-400 mb-6 font-urbanist flex items-center justify-center gap-2 text-center">
               <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 fill-yellow-400 flex-shrink-0" />
               Your Certificate of Participation
             </h3>
-            <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[0_0_40px_rgba(8,145,178,0.3)] border border-cyan-500/30 group">
+            <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[0_0_40px_rgba(8,145,178,0.3)] border border-violet-500/30 group">
               {/* Display the Base64 SVG inline */}
               <img
                 src={`data:image/svg+xml;base64,${certificateBase64}`}
@@ -196,7 +196,7 @@ export default function SurveyForm({
               <button
                 onClick={handlePngDownload}
                 disabled={isPngDownloading}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 disabled:opacity-50 text-white rounded-xl font-bold transition-all shadow-xl hover:shadow-cyan-500/30 font-urbanist tracking-wide"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 bg-gradient-to-r from-violet-600 to-emerald-600 hover:from-violet-500 hover:to-emerald-500 disabled:opacity-50 text-white rounded-xl font-bold transition-all shadow-xl hover:shadow-violet-500/30 font-urbanist tracking-wide"
               >
                 <ImageIcon className="w-5 h-5" />
                 {isPngDownloading ? "Generating..." : "Download PNG"}
@@ -232,11 +232,11 @@ export default function SurveyForm({
 
         {certificateBase64 && (
           <div className="mb-8 sm:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-both">
-            <h3 className="text-xl sm:text-2xl font-bold text-cyan-400 mb-6 font-urbanist flex items-center justify-center gap-2 text-center">
+            <h3 className="text-xl sm:text-2xl font-bold text-violet-400 mb-6 font-urbanist flex items-center justify-center gap-2 text-center">
               <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 fill-yellow-400 flex-shrink-0" />
               Your Certificate of Participation
             </h3>
-            <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[0_0_40px_rgba(8,145,178,0.3)] border border-cyan-500/30 group px-2 sm:px-0">
+            <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[0_0_40px_rgba(8,145,178,0.3)] border border-violet-500/30 group px-2 sm:px-0">
               {/* Display the Base64 SVG inline */}
               <img
                 src={`data:image/svg+xml;base64,${certificateBase64}`}
@@ -248,7 +248,7 @@ export default function SurveyForm({
               <button
                 onClick={handlePngDownload}
                 disabled={isPngDownloading}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 disabled:opacity-50 text-white rounded-xl font-bold transition-all shadow-xl hover:shadow-cyan-500/30 font-urbanist tracking-wide"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 bg-gradient-to-r from-violet-600 to-emerald-600 hover:from-violet-500 hover:to-emerald-500 disabled:opacity-50 text-white rounded-xl font-bold transition-all shadow-xl hover:shadow-violet-500/30 font-urbanist tracking-wide"
               >
                 <ImageIcon className="w-5 h-5" />
                 {isPngDownloading ? "Generating..." : "Download PNG"}
@@ -267,7 +267,7 @@ export default function SurveyForm({
 
         <button
           onClick={() => router.push(`/event/${slug}`)}
-          className="px-8 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold transition-all border border-white/10 hover:border-white/20 shadow-lg hover:shadow-cyan-500/10 font-urbanist"
+          className="px-8 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold transition-all border border-white/10 hover:border-white/20 shadow-lg hover:shadow-violet-500/10 font-urbanist"
         >
           Back to Event
         </button>
@@ -283,7 +283,7 @@ export default function SurveyForm({
       {/* Respondent Identity Section */}
       <div className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-sm shadow-xl">
         <h3 className="text-lg sm:text-xl font-bold text-white mb-5 sm:mb-6 font-urbanist tracking-wide flex items-center gap-2">
-          <User className="text-cyan-400" size={22} />
+          <User className="text-violet-400" size={22} />
           Respondent Details
         </h3>
 
@@ -297,11 +297,11 @@ export default function SurveyForm({
                   alt="Profile"
                   width={64}
                   height={64}
-                  className="rounded-full border-2 border-cyan-500/50"
+                  className="rounded-full border-2 border-violet-500/50"
                   unoptimized // Optional: needed if external images not configured in next.config.js
                 />
               ) : (
-                <div className="w-16 h-16 rounded-full bg-cyan-600/20 flex items-center justify-center border-2 border-cyan-500/30 text-cyan-400 text-xl font-bold font-urbanist">
+                <div className="w-16 h-16 rounded-full bg-violet-600/20 flex items-center justify-center border-2 border-violet-500/30 text-violet-400 text-xl font-bold font-urbanist">
                   {userProfile.first_name?.[0]}
                   {userProfile.last_name?.[0]}
                 </div>
@@ -330,7 +330,7 @@ export default function SurveyForm({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="w-full px-5 py-3.5 bg-black/20 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50 transition-all font-urbanist text-base sm:text-lg"
+              className="w-full px-5 py-3.5 bg-black/20 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50 transition-all font-urbanist text-base sm:text-lg"
             />
             <p className="text-xs sm:text-sm text-white/40 font-urbanist">
               Please enter the email you used to register for this event.
@@ -347,7 +347,7 @@ export default function SurveyForm({
             className="group space-y-4 bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-sm shadow-xl transition-all hover:bg-white/[0.07] duration-300"
           >
             <label className="block text-lg sm:text-xl font-bold text-white font-urbanist leading-snug">
-              <span className="text-cyan-400 mr-2">{idx + 1}.</span>
+              <span className="text-violet-400 mr-2">{idx + 1}.</span>
               {q.text}
               {q.required && <span className="text-red-400 ml-1">*</span>}
             </label>
@@ -360,7 +360,7 @@ export default function SurveyForm({
                   onChange={(e) => handleAnswerChange(q.id, e.target.value)}
                   placeholder="Type your answer here..."
                   rows={4}
-                  className="w-full px-5 py-4 bg-black/20 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50 transition-all font-urbanist resize-none text-base disabled:opacity-50"
+                  className="w-full px-5 py-4 bg-black/20 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50 transition-all font-urbanist resize-none text-base disabled:opacity-50"
                 />
               )}
 
@@ -396,7 +396,7 @@ export default function SurveyForm({
                       onClick={() => handleAnswerChange(q.id, option)}
                       className={`flex-1 px-6 py-4 rounded-xl font-bold text-lg transition-all font-urbanist border ${
                         answers[q.id] === option
-                          ? "bg-cyan-600 text-white border-cyan-500 shadow-[0_0_20px_rgba(8,145,178,0.4)] scale-[1.02]"
+                          ? "bg-violet-600 text-white border-violet-500 shadow-[0_0_20px_rgba(8,145,178,0.4)] scale-[1.02]"
                           : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
                       }`}
                     >
@@ -415,13 +415,13 @@ export default function SurveyForm({
                       onClick={() => handleAnswerChange(q.id, option)}
                       className={`px-5 py-4 rounded-xl text-left font-medium transition-all font-urbanist border flex items-center justify-between group ${
                         answers[q.id] === option
-                          ? "bg-cyan-600/20 text-cyan-300 border-cyan-500 shadow-[0_0_15px_rgba(8,145,178,0.2)]"
+                          ? "bg-violet-600/20 text-violet-300 border-violet-500 shadow-[0_0_15px_rgba(8,145,178,0.2)]"
                           : "bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white hover:border-white/20"
                       }`}
                     >
                       <span className="text-base sm:text-lg">{option}</span>
                       {answers[q.id] === option && (
-                        <Check className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-violet-400 flex-shrink-0" />
                       )}
                     </button>
                   ))}
@@ -458,7 +458,7 @@ export default function SurveyForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 sm:py-5 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white rounded-2xl text-lg sm:text-xl font-bold transition-all shadow-xl hover:shadow-cyan-500/30 disabled:opacity-50 disabled:cursor-not-allowed font-urbanist tracking-wide flex items-center justify-center gap-3 group order-1 md:order-2"
+          className="w-full py-4 sm:py-5 bg-gradient-to-r from-violet-600 to-emerald-600 hover:from-violet-500 hover:to-emerald-500 text-white rounded-2xl text-lg sm:text-xl font-bold transition-all shadow-xl hover:shadow-violet-500/30 disabled:opacity-50 disabled:cursor-not-allowed font-urbanist tracking-wide flex items-center justify-center gap-3 group order-1 md:order-2"
         >
           {isSubmitting ? (
             <>

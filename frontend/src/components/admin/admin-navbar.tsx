@@ -75,9 +75,9 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
 
           {/* Logo - Simplified */}
           <div className="flex items-center gap-2.5">
-            <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500/15 to-cyan-500/15 p-1.5 border border-cyan-500/20 flex-shrink-0">
+            <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/15 to-violet-500/15 p-1.5 border border-purple-500/20 flex-shrink-0">
               <Image
-                src="/images/logos/cncp-logo-transparent.png"
+                src="/images/logos/cncp-white-logo.png"
                 alt="Cisco NetConnect PUP - Manila"
                 fill
                 sizes="32px"
@@ -101,7 +101,7 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
                   onClick={() => handleTabChange(item.path)}
                   className={`flex items-center gap-2 px-4 py-1.5 rounded-md transition-all duration-200 font-urbanist ${
                     isActive
-                      ? "bg-cyan-500/10 text-cyan-400 shadow-sm shadow-cyan-500/10"
+                      ? "bg-purple-500/10 text-purple-400 shadow-sm shadow-purple-500/10"
                       : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
                   }`}
                 >
@@ -118,7 +118,7 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
           {/* Create Event Button - Cisco Blue */}
           <button
             onClick={handleCreateEvent}
-            className="flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)] transition-all duration-300 border border-[#049fd9]/30 hover:border-[#049fd9]/50 group"
+            className="flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)] transition-all duration-300 border border-[#8b5cf6]/30 hover:border-[#8b5cf6]/50 group"
           >
             <Plus className="w-4 h-4 transition-transform group-hover:rotate-90 duration-300" />
             <span className="text-sm font-medium tracking-wide">
@@ -159,7 +159,7 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
                     onClick={() => handleTabChange(item.path)}
                     className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-md transition-all duration-200 font-urbanist ${
                       isActive
-                        ? "bg-cyan-500/10 text-cyan-400 shadow-sm"
+                        ? "bg-purple-500/10 text-purple-400 shadow-sm"
                         : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
                     }`}
                   >
@@ -172,7 +172,7 @@ export function AdminNavbar({ activeTab }: AdminNavbarProps) {
               {/* Create New Event in Mobile Menu */}
               <button
                 onClick={handleCreateEvent}
-                className="w-full flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-all duration-300 border border-[#049fd9]/30 hover:border-[#049fd9]/50 mt-3"
+                className="w-full flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-urbanist shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-all duration-300 border border-[#8b5cf6]/30 hover:border-[#8b5cf6]/50 mt-3"
               >
                 <Plus className="w-4 h-4" />
                 <span className="text-sm font-medium tracking-wide">

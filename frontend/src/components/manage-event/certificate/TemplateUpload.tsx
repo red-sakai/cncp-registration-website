@@ -10,7 +10,7 @@ export function TemplateUpload({ handleImageUpload, isUploading }: TemplateUploa
   return (
     <div className="bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center border border-cyan-500/30 text-cyan-400">
+        <div className="w-12 h-12 bg-violet-500/20 rounded-full flex items-center justify-center border border-violet-500/30 text-violet-400">
           <Upload size={20} />
         </div>
         <div>

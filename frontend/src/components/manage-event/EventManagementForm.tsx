@@ -150,7 +150,7 @@ export function EventManagementForm({
               name="title"
               defaultValue={event.title}
               required
-              className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
             />
           </div>
 
@@ -162,7 +162,7 @@ export function EventManagementForm({
               name="description"
               rows={4}
               defaultValue={event.description}
-              className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+              className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors resize-none"
             />
           </div>
 
@@ -176,7 +176,7 @@ export function EventManagementForm({
                 name="startDate"
                 defaultValue={event.startDate}
                 required
-                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
             <div>
@@ -188,7 +188,7 @@ export function EventManagementForm({
                 name="startTime"
                 defaultValue={event.startTime}
                 required
-                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
             <div>
@@ -199,7 +199,7 @@ export function EventManagementForm({
                 type="time"
                 name="endTime"
                 defaultValue={event.endTime}
-                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
           </div>
@@ -213,7 +213,7 @@ export function EventManagementForm({
               name="location"
               defaultValue={event.location}
               placeholder="Enter event location"
-              className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
             />
           </div>
 
@@ -226,7 +226,7 @@ export function EventManagementForm({
                 type="text"
                 name="capacity"
                 defaultValue={event.capacity}
-                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
             <div>
@@ -237,7 +237,7 @@ export function EventManagementForm({
                 type="text"
                 name="ticketPrice"
                 defaultValue={event.ticketPrice}
-                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="font-urbanist w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
           </div>
@@ -252,7 +252,7 @@ export function EventManagementForm({
             </button>
             <button
               type="submit"
-              className="font-montserrat px-6 py-2.5 md:py-3 bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white text-sm md:text-base font-medium transition-colors"
+              className="font-montserrat px-6 py-2.5 md:py-3 bg-violet-600 hover:bg-cyan-700 rounded-lg text-white text-sm md:text-base font-medium transition-colors"
             >
               Save Changes
             </button>
@@ -290,7 +290,7 @@ export function EventManagementForm({
                 type="checkbox"
                 name="requireApproval"
                 defaultChecked={event.requireApproval}
-                className="w-4 h-4 rounded border-white/20 bg-white/5 text-cyan-600 focus:ring-cyan-500"
+                className="w-4 h-4 rounded border-white/20 bg-white/5 text-violet-600 focus:ring-violet-500"
               />
               <span className="font-urbanist text-white/80 text-sm">
                 Enabled
@@ -313,7 +313,7 @@ export function EventManagementForm({
                 type="checkbox"
                 name="registrationOpen"
                 defaultChecked={registrationOpenValue}
-                className="w-4 h-4 rounded border-white/20 bg-white/5 text-cyan-600 focus:ring-cyan-500"
+                className="w-4 h-4 rounded border-white/20 bg-white/5 text-violet-600 focus:ring-violet-500"
               />
               <span className="font-urbanist text-white/80 text-sm">
                 Enabled
@@ -323,7 +323,7 @@ export function EventManagementForm({
           <div className="flex justify-end">
             <button
               type="submit"
-              className="font-montserrat px-6 py-2.5 md:py-3 bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white text-sm md:text-base font-medium transition-colors"
+              className="font-montserrat px-6 py-2.5 md:py-3 bg-violet-600 hover:bg-cyan-700 rounded-lg text-white text-sm md:text-base font-medium transition-colors"
             >
               Save Settings
             </button>

@@ -62,7 +62,7 @@ export default function SurveyBuilder({
             </span>
             <button
               onClick={toggleEnabled}
-              className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500/50 ${
+              className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
                 config.isEnabled ? "bg-emerald-500" : "bg-white/10"
               }`}
             >
@@ -78,8 +78,8 @@ export default function SurveyBuilder({
 
       {/* Info Banner (Optional, similar to alerts in other parts of app) */}
       {config.isEnabled && (
-        <div className="flex items-start gap-3 p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-200 text-sm">
-          <Info className="w-5 h-5 flex-shrink-0 text-cyan-400" />
+        <div className="flex items-start gap-3 p-4 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-200 text-sm">
+          <Info className="w-5 h-5 flex-shrink-0 text-violet-400" />
           <p>
             This survey will be available to attendees after the event ends. You
             can include a link to it in your post-event emails.
@@ -113,7 +113,7 @@ export default function SurveyBuilder({
             </p>
             <button
               onClick={() => addQuestion("rating")}
-              className="px-6 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-sm font-bold transition-all shadow-lg hover:shadow-cyan-500/20"
+              className="px-6 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-sm font-bold transition-all shadow-lg hover:shadow-violet-500/20"
             >
               Start with a Rating Question
             </button>
@@ -126,7 +126,7 @@ export default function SurveyBuilder({
         <div className="bg-[#0a1520]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center justify-between gap-4">
           <button
             onClick={() => addQuestion("text")}
-            className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white hover:text-cyan-200 rounded-xl text-sm font-bold transition-colors border border-white/10"
+            className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white hover:text-violet-200 rounded-xl text-sm font-bold transition-colors border border-white/10"
           >
             <Plus size={18} />
             <span className="hidden sm:inline">Add Question</span>
@@ -143,7 +143,7 @@ export default function SurveyBuilder({
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className="flex items-center gap-2 px-8 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-sm font-bold transition-all shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+              className="flex items-center gap-2 px-8 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-bold transition-all shadow-lg hover:shadow-violet-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
             >
               {isSaving ? (
                 <>

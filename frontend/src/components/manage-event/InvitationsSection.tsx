@@ -13,7 +13,7 @@ export function InvitationsSection() {
             Invite subscribers, contacts and past guests via email or SMS.
           </p>
         </div>
-        <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white text-sm font-medium transition-colors whitespace-nowrap self-start md:self-auto">
+        <button className="px-4 py-2 bg-violet-600 hover:bg-cyan-700 rounded-lg text-white text-sm font-medium transition-colors whitespace-nowrap self-start md:self-auto">
           + Invite Guests
         </button>
       </div>

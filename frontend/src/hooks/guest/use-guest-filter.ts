@@ -20,8 +20,6 @@ export function useGuestFilter(guests: Guest[]) {
 
   const filteredGuests = useMemo(() => {
     const statusFilteredGuests = guests.filter((guest) => {
-      if (!guest.users) return false;
-
       const matchesStatus =
         statusFilter === "all" ||
         (statusFilter === "registered"

@@ -162,8 +162,8 @@ export default function UserRegisterForm({ nextUrl }: UserRegisterFormProps) {
               onClick={() => setStep(2)}
                 className="
                   w-full
-                  bg-[#049fd9]
-                  hover:bg-[#0389b8]
+                  bg-[#8b5cf6]
+                  hover:bg-[#7c3aed]
                   text-white
                   font-semibold
                   py-3.5
@@ -327,8 +327,8 @@ export default function UserRegisterForm({ nextUrl }: UserRegisterFormProps) {
                 }
                 className="
                   w-full
-                  bg-[#049fd9]
-                  hover:bg-[#0389b8]
+                  bg-[#8b5cf6]
+                  hover:bg-[#7c3aed]
                   text-white
                   font-semibold
                   py-3.5

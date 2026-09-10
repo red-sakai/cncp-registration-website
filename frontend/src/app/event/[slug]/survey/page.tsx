@@ -82,7 +82,7 @@ export default async function SurveyPage({ params }: PageProps) {
           </p>
           <Link
             href={`/event/${slug}`}
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors font-urbanist"
+            className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 transition-colors font-urbanist"
           >
             <ArrowLeft size={16} /> Back to Event
           </Link>
@@ -101,7 +101,7 @@ export default async function SurveyPage({ params }: PageProps) {
     : "";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0533] to-[#0d1137] text-white relative overflow-x-hidden">
       {!user && <SurveyAuthModal eventSlug={slug} />}
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
@@ -120,9 +120,9 @@ export default async function SurveyPage({ params }: PageProps) {
             {event.event_name}
           </h1>
 
-          <div className="flex items-center justify-start gap-4 text-cyan-400 font-urbanist font-medium tracking-wide">
+          <div className="flex items-center justify-start gap-4 text-violet-400 font-urbanist font-medium tracking-wide">
             <span>Post-Event Survey</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/50" />
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-500/50" />
             <span className="text-white/60">{eventDate}</span>
           </div>
 

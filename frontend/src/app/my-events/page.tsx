@@ -103,7 +103,7 @@ export default function MyEventsPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#001a33] via-[#002d52] to-[#001221] text-white relative overflow-x-hidden font-urbanist">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0015] via-[#1a0533] to-[#0d1137] text-white relative overflow-x-hidden font-urbanist">
       <BokehBackground />
       <Squares direction="diagonal" speed={0.3} />
 
@@ -167,7 +167,7 @@ export default function MyEventsPage() {
                     onClick={() => router.push(`/event/${ev.slug}`)}
                     className="group text-left bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-200 hover:bg-black/50"
                   >
-                    <div className="relative h-40 bg-gradient-to-br from-[#001a33] to-[#002d52] overflow-hidden">
+                    <div className="relative h-40 bg-gradient-to-br from-[#0a0015] to-[#1a0533] overflow-hidden">
                       {ev.cover_image ? (
                         <Image
                           src={ev.cover_image}

@@ -8,7 +8,7 @@ export const DEFAULT_CERTIFICATE_CONFIG: CertificateConfig = {
     y: 993,
     width: 2407,
     height: 182,
-    color: "#2490ab",
+    color: "#8b5cf6",
     baseFontSize: 80,
     thresholdLength: 20,
     minFontSize: 30,

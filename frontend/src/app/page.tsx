@@ -38,7 +38,7 @@ export default async function Home({ searchParams }: PageProps) {
         <div className="text-center mb-10 space-y-3">
           <div className="inline-block mb-4">
             <Image
-              src="/images/logos/cncp-logo-transparent.png"
+              src="/images/logos/cncp-white-logo.png"
               alt="Cisco NetConnect PUP - Manila"
               width={96}
               height={96}

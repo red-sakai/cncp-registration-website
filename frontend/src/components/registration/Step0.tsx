@@ -116,7 +116,7 @@ export function Step0({ onNext }: Step0Props) {
           type="button"
           onClick={onNext}
           disabled={!agreedToPolicy}
-          className="w-full bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
         >
           Accept & Continue
         </button>

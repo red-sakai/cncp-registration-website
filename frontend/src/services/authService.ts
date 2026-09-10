@@ -1,7 +1,6 @@
 import { findUserByEmail } from "@/repositories/userRepository";
 import { 
   getAuthUser, 
-  getUserWithMetadata,
   sendPasswordResetEmail,
   signInWithPassword,
   updatePassword,
@@ -47,12 +46,13 @@ export async function canManageEvent(slug: string): Promise<boolean> {
   const user = await getAuthUser();
   if (!user) return false;
 
-  const authUser = await getUserWithMetadata(user.id);
-  if (authUser) {
-    const appRole = (authUser.app_metadata?.role as string) ?? null;
-    const jwtRole = authUser.role ?? null;
-    if (appRole === "admin" || jwtRole === "admin") return true;
-  }
+  const appRole = (user.app_metadata?.role as string) ?? null;
+  const jwtRole = user.role ?? null;
+  if (appRole === "admin" || jwtRole === "admin") return true;
+
+  const { getDbUserRole } = await import("@/repositories/userRepository");
+  const dbRole = await getDbUserRole(user.id);
+  if (dbRole === "admin") return true;
 
   try {
     const { getOrganizerIdBySlug } = await import("@/repositories/eventRepository");

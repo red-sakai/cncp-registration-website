@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Cisco NetConnect PUP - Manila",
   description: "Cisco NetConnect PUP - Manila Registration and Event Management",
   icons: {
-    icon: "/images/logos/cncp-logo-transparent.png",
+    icon: "/images/logos/cncp-white-logo.png",
   },
 };
 

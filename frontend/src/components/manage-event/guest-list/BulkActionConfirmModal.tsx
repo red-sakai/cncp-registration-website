@@ -67,7 +67,7 @@ export function BulkActionConfirmModal({
             type="button"
             onClick={onConfirm}
             disabled={isLoading}
-            className="px-6 py-2.5 rounded-xl font-bold transition-all duration-200 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 border-2 border-cyan-500/20 disabled:opacity-50 flex items-center justify-center min-w-[120px]"
+            className="px-6 py-2.5 rounded-xl font-bold transition-all duration-200 bg-violet-500/10 text-violet-400 hover:bg-violet-500/20 border-2 border-violet-500/20 disabled:opacity-50 flex items-center justify-center min-w-[120px]"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">

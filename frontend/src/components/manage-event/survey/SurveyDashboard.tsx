@@ -339,14 +339,14 @@ export default function SurveyDashboard({
 
         <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/10 min-h-[100px] flex flex-col">
           <div className="flex items-center gap-2 mb-2">
-            <span className="p-1.5 rounded-lg bg-blue-500/20 shrink-0">
-              <UserCheck className="w-4 h-4 text-blue-400" />
+            <span className="p-1.5 rounded-lg bg-indigo-500/20 shrink-0">
+              <UserCheck className="w-4 h-4 text-indigo-400" />
             </span>
             <p className="font-urbanist text-white/60 text-xs truncate">
               Attended
             </p>
           </div>
-          <p className="font-urbanist text-xl md:text-3xl font-bold text-blue-400">
+          <p className="font-urbanist text-xl md:text-3xl font-bold text-indigo-400">
             {stats?.attended ?? 0}
           </p>
           <p className="text-xs text-white/40 mt-1">Checked in at event</p>
@@ -386,14 +386,14 @@ export default function SurveyDashboard({
 
         <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/10 min-h-[100px] flex flex-col">
           <div className="flex items-center gap-2 mb-2">
-            <span className="p-1.5 rounded-lg bg-cyan-500/20 shrink-0">
-              <Percent className="w-4 h-4 text-cyan-400" />
+            <span className="p-1.5 rounded-lg bg-violet-500/20 shrink-0">
+              <Percent className="w-4 h-4 text-violet-400" />
             </span>
             <p className="font-urbanist text-white/60 text-xs truncate">
               Completion
             </p>
           </div>
-          <p className="font-urbanist text-xl md:text-3xl font-bold text-cyan-400">
+          <p className="font-urbanist text-xl md:text-3xl font-bold text-violet-400">
             {completionRate}%
           </p>
           <p className="text-xs text-white/40 mt-1">% answered survey</p>
@@ -415,7 +415,7 @@ export default function SurveyDashboard({
             <button
               onClick={handleExport}
               disabled={exporting || filteredDetails.length === 0}
-              className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg text-sm font-medium transition-colors self-start sm:self-center"
+              className="flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg text-sm font-medium transition-colors self-start sm:self-center"
             >
               {exporting ? (
                 <Loader2 size={16} className="animate-spin" />
@@ -439,7 +439,7 @@ export default function SurveyDashboard({
                 placeholder="Search by name or email..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="font-urbanist w-full pl-9 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="font-urbanist w-full pl-9 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
             <select
@@ -449,7 +449,7 @@ export default function SurveyDashboard({
                   e.target.value as "all" | "answered" | "not_answered",
                 )
               }
-              className="font-urbanist px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors sm:w-48"
+              className="font-urbanist px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-violet-500 transition-colors sm:w-48"
               style={{
                 backgroundColor: "rgba(255,255,255,0.05)",
                 color: "#fff",
@@ -553,7 +553,7 @@ export default function SurveyDashboard({
                       {row.survey_answered ? (
                         <button
                           onClick={() => setFeedbackRow(row)}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-colors"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-violet-400 hover:text-violet-300 hover:bg-violet-500/10 rounded-lg transition-colors"
                         >
                           <Eye size={14} />
                           View feedback

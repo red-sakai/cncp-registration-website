@@ -27,6 +27,37 @@ export async function getUserWithMetadata(userId: string) {
   return user;
 }
 
+export async function getAuthUserMetadata(userId: string) {
+  const supabase = await createClient();
+  const { data: { user }, error } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    return null;
+  }
+
+  if (user.id === userId) {
+    return user;
+  }
+
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceRoleKey) {
+    return null;
+  }
+
+  const { createClient: createAdminClient } = await import("@supabase/supabase-js");
+  const adminClient = createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    serviceRoleKey,
+  );
+
+  const { data: authUser, error: adminError } = await adminClient.auth.admin.getUserById(userId);
+  if (adminError || !authUser?.user) {
+    return null;
+  }
+
+  return authUser.user;
+}
+
 export async function getAuthUserAndProfile() {
   const supabase = await createClient();
   const {

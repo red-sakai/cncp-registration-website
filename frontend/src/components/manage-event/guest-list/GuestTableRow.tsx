@@ -85,7 +85,7 @@ export function GuestTableRow({
             onChange={(e) =>
               onSelectGuest(guest.registrant_id, e.target.checked)
             }
-            className="w-4 h-4 rounded border-white/20 bg-white/5 text-cyan-600 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
+            className="w-4 h-4 rounded border-white/20 bg-white/5 text-violet-600 focus:ring-2 focus:ring-violet-500 focus:ring-offset-0 cursor-pointer"
           />
         </td>
         <td className="font-urbanist text-white text-sm py-4 px-2">
@@ -124,7 +124,7 @@ export function GuestTableRow({
               )
             }
             disabled={isPending}
-            className={`font-urbanist px-3 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-cyan-500/50 ${
+            className={`font-urbanist px-3 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
               !guest.is_registered
                 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/30"
                 : guest.is_going === false
@@ -198,7 +198,7 @@ export function GuestTableRow({
                   <button
                     onClick={() => onCheckInChange(guest.registrant_id, false)}
                     disabled={isPending}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/20 px-2.5 py-1 text-xs font-medium text-cyan-300 hover:bg-cyan-500/30 transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-violet-500/30 bg-violet-500/20 px-2.5 py-1 text-xs font-medium text-violet-300 hover:bg-violet-500/30 transition-colors disabled:opacity-50"
                   >
                     <Check size={11} />
                     Checked In
@@ -226,7 +226,7 @@ export function GuestTableRow({
                   <button
                     onClick={handleOpenQrModal}
                     disabled={isGeneratingQr}
-                    className="p-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 transition-colors disabled:opacity-50"
+                    className="p-1.5 rounded-lg border border-violet-500/30 bg-violet-500/10 text-violet-300 hover:bg-violet-500/20 transition-colors disabled:opacity-50"
                     title="View Ticket QR"
                   >
                     {isGeneratingQr ? (
@@ -247,7 +247,7 @@ export function GuestTableRow({
             <button
               onClick={() => onViewAnswers(guest)}
               disabled={isPending}
-              className="p-1.5 hover:bg-cyan-500/20 rounded text-cyan-400 transition-colors disabled:opacity-50"
+              className="p-1.5 hover:bg-violet-500/20 rounded text-violet-400 transition-colors disabled:opacity-50"
               title="View Answers"
             >
               <Eye size={16} />

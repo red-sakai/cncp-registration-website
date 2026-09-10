@@ -926,7 +926,7 @@ export default function PreviewPane({
                               : item.status === "error"
                                 ? "border-rose-400/40 text-rose-300"
                                 : item.status === "sending"
-                                  ? "border-cyan-400/40 text-cyan-300"
+                                  ? "border-violet-400/40 text-violet-300"
                                   : "border-primary/30 text-primary/80"
                           }`}
                         >

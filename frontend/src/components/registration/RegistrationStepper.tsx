@@ -15,7 +15,7 @@ export function RegistrationStepper({ currentStep, totalSteps }: RegistrationSte
         
         {/* Active Line Progress - Mobile */}
         <div 
-          className="absolute top-1/2 left-[8px] h-0.5 bg-gradient-to-r from-[#049fd9] to-[#c5a55a] rounded-full -translate-y-1/2 transition-all duration-500 ease-out sm:hidden"
+          className="absolute top-1/2 left-[8px] h-0.5 bg-gradient-to-r from-[#8b5cf6] to-[#c5a55a] rounded-full -translate-y-1/2 transition-all duration-500 ease-out sm:hidden"
           style={{ 
             width: currentStep === 0 
               ? '0%' 
@@ -25,7 +25,7 @@ export function RegistrationStepper({ currentStep, totalSteps }: RegistrationSte
         
         {/* Active Line Progress - Small screens */}
         <div 
-          className="hidden sm:block md:hidden absolute top-1/2 left-[12px] h-1 bg-gradient-to-r from-[#049fd9] to-[#c5a55a] rounded-full -translate-y-1/2 transition-all duration-500 ease-out"
+          className="hidden sm:block md:hidden absolute top-1/2 left-[12px] h-1 bg-gradient-to-r from-[#8b5cf6] to-[#c5a55a] rounded-full -translate-y-1/2 transition-all duration-500 ease-out"
           style={{ 
             width: currentStep === 0 
               ? '0%' 
@@ -35,7 +35,7 @@ export function RegistrationStepper({ currentStep, totalSteps }: RegistrationSte
         
         {/* Active Line Progress - Medium+ screens */}
         <div 
-          className="hidden md:block absolute top-1/2 left-[16px] h-1 bg-gradient-to-r from-[#049fd9] to-[#c5a55a] rounded-full -translate-y-1/2 transition-all duration-500 ease-out"
+          className="hidden md:block absolute top-1/2 left-[16px] h-1 bg-gradient-to-r from-[#8b5cf6] to-[#c5a55a] rounded-full -translate-y-1/2 transition-all duration-500 ease-out"
           style={{ 
             width: currentStep === 0 
               ? '0%' 
@@ -55,7 +55,7 @@ export function RegistrationStepper({ currentStep, totalSteps }: RegistrationSte
                 isActive 
                     ? "bg-[#c5a55a] border-[#c5a55a] sm:scale-125 shadow-[0_0_15px_rgba(197,165,90,0.5)] sm:shadow-[0_0_20px_rgba(197,165,90,0.6)]" 
                     : isCompleted 
-                        ? "bg-[#049fd9] border-[#049fd9] shadow-[0_0_8px_rgba(4,159,217,0.4)] sm:shadow-[0_0_10px_rgba(4,159,217,0.5)]"
+                        ? "bg-[#8b5cf6] border-[#8b5cf6] shadow-[0_0_8px_rgba(4,159,217,0.4)] sm:shadow-[0_0_10px_rgba(4,159,217,0.5)]"
                         : "bg-[rgba(0,26,51,0.9)] border-white/20"
               )}>
                 {/* Inner Dot for completed/active */}

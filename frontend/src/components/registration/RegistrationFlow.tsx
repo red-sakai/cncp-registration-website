@@ -233,7 +233,7 @@ export function RegistrationFlow({
               router.refresh();
               router.push(eventSlug ? `/event/${eventSlug}?refresh=${Date.now()}` : "/");
             }}
-            className="px-6 py-3 bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+            className="px-6 py-3 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
           >
             Go Back to Event Page
           </button>
@@ -266,7 +266,7 @@ export function RegistrationFlow({
                       router.refresh();
                       router.push(eventSlug ? `/event/${eventSlug}?refresh=${Date.now()}` : "/");
                     }}
-                    className="px-6 py-3 bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+                    className="px-6 py-3 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
                 >
                     {eventSlug ? "Go Back to Event Page" : "Go to Home"}
                 </button>

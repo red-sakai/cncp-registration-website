@@ -40,7 +40,7 @@ export function QuestionEditor({
                 value={question.text}
                 onChange={(e) => onUpdate({ text: e.target.value })}
                 placeholder="e.g. How would you rate the event?"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-cyan-500 transition-colors"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base placeholder-white/40 focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
 
@@ -63,7 +63,7 @@ export function QuestionEditor({
                     });
                     setShowOptions(newType === "multiple_choice");
                   }}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base focus:outline-none focus:border-cyan-500 appearance-none cursor-pointer [&>option]:bg-[#0a1520]"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-base focus:outline-none focus:border-violet-500 appearance-none cursor-pointer [&>option]:bg-[#0a1520]"
                 >
                   <option value="text">Text Answer</option>
                   <option value="rating">Star Rating (1-5)</option>
@@ -77,13 +77,13 @@ export function QuestionEditor({
 
           {/* Multiple Choice Options */}
           {question.type === "multiple_choice" && (
-            <div className="pl-4 border-l-2 border-cyan-500/30 space-y-3 mt-4 bg-white/5 p-4 rounded-r-lg">
+            <div className="pl-4 border-l-2 border-violet-500/30 space-y-3 mt-4 bg-white/5 p-4 rounded-r-lg">
               <label className="text-sm font-bold text-white/90 block mb-2">
                 Options
               </label>
               {question.options?.map((opt, i) => (
                 <div key={i} className="flex gap-3 items-center">
-                  <div className="w-2 h-2 rounded-full bg-cyan-500/50" />
+                  <div className="w-2 h-2 rounded-full bg-violet-500/50" />
                   <input
                     type="text"
                     value={opt}
@@ -92,7 +92,7 @@ export function QuestionEditor({
                       newOptions[i] = e.target.value;
                       onUpdate({ options: newOptions });
                     }}
-                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-violet-500 transition-colors"
                   />
                   <button
                     onClick={() => {
@@ -115,7 +115,7 @@ export function QuestionEditor({
                     ],
                   })
                 }
-                className="text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-2 mt-2 px-2 py-1 hover:bg-white/5 rounded-md transition-colors"
+                className="text-sm text-violet-400 hover:text-violet-300 flex items-center gap-2 mt-2 px-2 py-1 hover:bg-white/5 rounded-md transition-colors"
               >
                 <Plus size={14} /> Add Option
               </button>
@@ -130,7 +130,7 @@ export function QuestionEditor({
                   type="checkbox"
                   checked={question.required}
                   onChange={(e) => onUpdate({ required: e.target.checked })}
-                  className="peer appearance-none w-5 h-5 rounded border border-white/20 bg-white/5 checked:bg-cyan-600 checked:border-cyan-600 focus:ring-offset-0 focus:ring-cyan-500/50 transition-all cursor-pointer"
+                  className="peer appearance-none w-5 h-5 rounded border border-white/20 bg-white/5 checked:bg-violet-600 checked:border-violet-600 focus:ring-offset-0 focus:ring-violet-500/50 transition-all cursor-pointer"
                 />
                 <Check
                   size={12}

@@ -137,7 +137,7 @@ export default function CertificateBuilder({
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="w-full py-5 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white rounded-xl font-bold shadow-xl hover:shadow-cyan-500/30 transition-all flex items-center justify-center gap-3 tracking-wide text-lg font-urbanist group"
+            className="w-full py-5 bg-gradient-to-r from-violet-600 to-emerald-600 hover:from-violet-500 hover:to-emerald-500 text-white rounded-xl font-bold shadow-xl hover:shadow-violet-500/30 transition-all flex items-center justify-center gap-3 tracking-wide text-lg font-urbanist group"
           >
             {isSaving ? (
               <Loader2 className="animate-spin" size={24} />

@@ -74,8 +74,8 @@ export default function ForgotPasswordForm() {
           disabled={isPending}
           className="
             w-full
-            bg-[#049fd9]
-            hover:bg-[#0389b8]
+            bg-[#8b5cf6]
+            hover:bg-[#7c3aed]
             text-white
             font-semibold
             py-3.5

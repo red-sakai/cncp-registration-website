@@ -104,7 +104,7 @@ export const AdminDashboardContent: React.FC<AdminDashboardContentProps> = ({
                       icon={Users}
                       trend="+12% from last month"
                       trendUp={true}
-                      color="bg-blue-500/20"
+                      color="bg-indigo-500/20"
                     />
                     <StatCard
                       title="Active Events"

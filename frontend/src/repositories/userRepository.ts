@@ -32,4 +32,19 @@ export async function getUserProfile(userId: string) {
   return data;
 }
 
+export async function getDbUserRole(userId: string): Promise<string | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("users")
+    .select("role")
+    .eq("users_id", userId)
+    .maybeSingle();
+
+  if (error) {
+    return null;
+  }
+
+  return data?.role ?? null;
+}
+
 // Implement other user-related repository functions here, such as createUser, updateUser, deleteUser, listUsers, etc, if there is

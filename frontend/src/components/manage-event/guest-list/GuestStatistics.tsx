@@ -99,14 +99,14 @@ export function GuestStatistics({
 
           <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/10 min-h-[100px] flex flex-col">
             <div className="flex items-center gap-2 mb-2">
-              <span className="p-1.5 rounded-lg bg-blue-500/20 shrink-0">
-                <CheckCircle className="w-4 h-4 text-blue-400" />
+              <span className="p-1.5 rounded-lg bg-indigo-500/20 shrink-0">
+                <CheckCircle className="w-4 h-4 text-indigo-400" />
               </span>
               <p className="font-urbanist text-white/60 text-xs truncate">
                 Checked In
               </p>
             </div>
-            <p className="font-urbanist text-xl md:text-3xl font-bold text-blue-400">
+            <p className="font-urbanist text-xl md:text-3xl font-bold text-indigo-400">
               {checkedIn}
             </p>
             <p className="text-xs text-white/40 mt-1">At event</p>
@@ -140,14 +140,14 @@ export function GuestStatistics({
         <div className="grid grid-cols-2 gap-3 md:gap-4">
           <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/10 min-h-[100px] flex flex-col">
             <div className="flex items-center gap-2 mb-2">
-              <span className="p-1.5 rounded-lg bg-cyan-500/20 shrink-0">
-                <Ticket className="w-4 h-4 text-cyan-400" />
+              <span className="p-1.5 rounded-lg bg-violet-500/20 shrink-0">
+                <Ticket className="w-4 h-4 text-violet-400" />
               </span>
               <p className="font-urbanist text-white/60 text-xs truncate">
                 Tickets Ready
               </p>
             </div>
-            <p className="font-urbanist text-xl md:text-3xl font-bold text-cyan-400">
+            <p className="font-urbanist text-xl md:text-3xl font-bold text-violet-400">
               {ticketsReady}
             </p>
             <p className="text-xs text-white/40 mt-1">QR code generated</p>

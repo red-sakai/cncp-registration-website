@@ -34,7 +34,7 @@ export function GuestTableHeader({
                 }
               }}
               onChange={(e) => onSelectAll(e.target.checked)}
-              className="w-4 h-4 rounded border-white/20 bg-white/5 text-cyan-600 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
+              className="w-4 h-4 rounded border-white/20 bg-white/5 text-violet-600 focus:ring-2 focus:ring-violet-500 focus:ring-offset-0 cursor-pointer"
             />
             <button
               onClick={onToggleSelectMenu}

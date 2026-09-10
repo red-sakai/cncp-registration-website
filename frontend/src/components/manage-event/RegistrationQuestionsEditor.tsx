@@ -136,7 +136,7 @@ export function RegistrationQuestionsEditor({
             type="button"
             onClick={handleSave}
             disabled={isSaving}
-            className="font-urbanist px-4 py-2 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm font-medium transition-colors flex items-center gap-2"
+            className="font-urbanist px-4 py-2 bg-violet-600 hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm font-medium transition-colors flex items-center gap-2"
           >
             {isSaving ? (
               <>
@@ -164,7 +164,7 @@ export function RegistrationQuestionsEditor({
             >
               {/* Question row */}
               <div className="flex items-start gap-3 mb-3">
-                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-cyan-600/30 border border-cyan-500/30 flex items-center justify-center text-cyan-300 text-xs font-bold mt-1">
+                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-violet-600/30 border border-violet-500/30 flex items-center justify-center text-violet-300 text-xs font-bold mt-1">
                   {index + 1}
                 </div>
                 <input
@@ -186,7 +186,7 @@ export function RegistrationQuestionsEditor({
                       updateQuestion(question.id, "allowedFileTypes", [".pdf"]);
                     }
                   }}
-                  className="font-urbanist flex-shrink-0 bg-[#1a1a2e] border border-white/20 rounded-lg px-3 py-1.5 text-sm text-white focus:border-cyan-500/50 focus:outline-none cursor-pointer"
+                  className="font-urbanist flex-shrink-0 bg-[#1a1a2e] border border-white/20 rounded-lg px-3 py-1.5 text-sm text-white focus:border-violet-500/50 focus:outline-none cursor-pointer"
                 >
                   {questionTypes.map((t) => (
                     <option key={t.value} value={t.value} className="bg-[#1a1a2e] text-white">
@@ -210,7 +210,7 @@ export function RegistrationQuestionsEditor({
                   id={`required-${question.id}`}
                   checked={question.required}
                   onChange={(e) => updateQuestion(question.id, "required", e.target.checked)}
-                  className="w-4 h-4 rounded bg-white/5 border-white/20 text-cyan-600 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
+                  className="w-4 h-4 rounded bg-white/5 border-white/20 text-violet-600 focus:ring-violet-500 focus:ring-offset-0 cursor-pointer"
                 />
                 <label
                   htmlFor={`required-${question.id}`}
@@ -235,7 +235,7 @@ export function RegistrationQuestionsEditor({
                         updateQuestion(question.id, "validationMessage", selected.message);
                       }
                     }}
-                    className="font-urbanist w-full bg-[#1a1a2e] border border-white/20 rounded-lg px-3 py-2 text-sm text-white focus:border-cyan-500/50 focus:outline-none cursor-pointer"
+                    className="font-urbanist w-full bg-[#1a1a2e] border border-white/20 rounded-lg px-3 py-2 text-sm text-white focus:border-violet-500/50 focus:outline-none cursor-pointer"
                   >
                     {validationPatterns.map((p) => (
                       <option key={p.value} value={p.value} className="bg-[#1a1a2e] text-white">
@@ -267,7 +267,7 @@ export function RegistrationQuestionsEditor({
                         value={option}
                         onChange={(e) => updateOption(question.id, optionIndex, e.target.value)}
                         placeholder={`Option ${optionIndex + 1}`}
-                        className="font-urbanist flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white placeholder-white/30 focus:border-cyan-500/50 focus:outline-none"
+                        className="font-urbanist flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white placeholder-white/30 focus:border-violet-500/50 focus:outline-none"
                       />
                       <button
                         type="button"
@@ -282,7 +282,7 @@ export function RegistrationQuestionsEditor({
                   <button
                     type="button"
                     onClick={() => addOption(question.id)}
-                    className="font-urbanist flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-dashed border-white/20 hover:border-cyan-500/50 hover:bg-cyan-500/5 text-white/50 hover:text-cyan-400 text-xs font-medium transition-all"
+                    className="font-urbanist flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-dashed border-white/20 hover:border-violet-500/50 hover:bg-violet-500/5 text-white/50 hover:text-violet-400 text-xs font-medium transition-all"
                   >
                     <Plus className="w-3 h-3" />
                     Add Option
@@ -306,7 +306,7 @@ export function RegistrationQuestionsEditor({
         <button
           type="button"
           onClick={addQuestion}
-          className="font-urbanist w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-black/30 border border-dashed border-white/20 hover:border-cyan-500/50 hover:bg-cyan-500/5 text-white/50 hover:text-cyan-400 text-sm font-medium transition-all"
+          className="font-urbanist w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-black/30 border border-dashed border-white/20 hover:border-violet-500/50 hover:bg-violet-500/5 text-white/50 hover:text-violet-400 text-sm font-medium transition-all"
         >
           <Plus className="w-4 h-4" />
           Add Question

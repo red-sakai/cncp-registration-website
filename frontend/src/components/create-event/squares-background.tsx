@@ -19,9 +19,9 @@ interface SquaresProps {
 const Squares: React.FC<SquaresProps> = ({
   direction = 'right',
   speed = 0.5,
-  borderColor = 'rgba(4, 159, 217, 0.03)',
+  borderColor = 'rgba(139, 92, 246, 0.03)',
   squareSize = 40,
-  hoverFillColor = 'rgba(4, 159, 217, 0.02)'
+  hoverFillColor = 'rgba(139, 92, 246, 0.02)'
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number | null>(null);
@@ -81,9 +81,9 @@ const Squares: React.FC<SquaresProps> = ({
         canvas.height / 2,
         Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
       );
-      gradient.addColorStop(0, 'rgba(0, 26, 51, 0)');
-      gradient.addColorStop(0.6, 'rgba(0, 26, 51, 0.3)');
-      gradient.addColorStop(1, 'rgba(0, 26, 51, 0.7)');
+      gradient.addColorStop(0, 'rgba(10, 0, 21, 0)');
+      gradient.addColorStop(0.6, 'rgba(10, 0, 21, 0.3)');
+      gradient.addColorStop(1, 'rgba(10, 0, 21, 0.7)');
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);

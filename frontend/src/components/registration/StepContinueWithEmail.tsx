@@ -143,7 +143,7 @@ export function StepContinueWithEmail({
     "w-full !bg-[rgba(0,26,51,0.9)] border border-white/20 rounded-xl px-4 py-3 !text-white text-sm !placeholder:text-white/40 outline-none transition-all duration-200 focus:border-[#c5a55a] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
   const labelClass = "block text-[#c5a55a] text-[11px] font-medium mb-1.5";
   const btnPrimary =
-    "w-full bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm disabled:opacity-60 disabled:cursor-not-allowed";
+    "w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm disabled:opacity-60 disabled:cursor-not-allowed";
   const btnSecondary =
     "flex-1 py-3.5 rounded-xl border border-white/20 hover:bg-white/5 text-white/70 font-semibold text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
@@ -245,7 +245,7 @@ export function StepContinueWithEmail({
             <button
               type="submit"
               disabled={loading || !password.trim()}
-              className="flex-1 min-w-0 py-3.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold text-sm transition-all duration-200"
+              className="flex-1 min-w-0 py-3.5 rounded-xl bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold text-sm transition-all duration-200"
             >
               {loading ? "Signing in…" : "Sign In"}
             </button>
@@ -348,7 +348,7 @@ export function StepContinueWithEmail({
               type="submit"
               form="create-account-form"
               disabled={loading || !firstName.trim() || !lastName.trim() || !registerPassword || registerPassword !== confirmPassword}
-              className="flex-1 min-w-0 py-3.5 rounded-xl bg-[#049fd9] hover:bg-[#0389b8] text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-1.5"
+              className="flex-1 min-w-0 py-3.5 rounded-xl bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-1.5"
             >
               {loading ? "Signing up…" : "Sign Up"}
             </button>
