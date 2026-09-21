@@ -126,16 +126,17 @@ export async function updateEventDetails(
     throw new Error("Capacity must be a positive number");
   }
 
-  // Map to database schema
+  // Map to database schema – only include fields that were actually provided
   const mappedDetails: Record<string, unknown> = {
-    event_name: details.title,
-    description: details.description,
-    location: details.location,
-    price: details.ticketPrice,
-    capacity: parsedCapacity,
-    require_approval: details.requireApproval,
     modified_at: new Date().toISOString(),
   };
+
+  if (details.title !== undefined) mappedDetails.event_name = details.title;
+  if (details.description !== undefined) mappedDetails.description = details.description;
+  if (details.location !== undefined) mappedDetails.location = details.location;
+  if (details.ticketPrice !== undefined) mappedDetails.price = details.ticketPrice;
+  if (details.capacity !== undefined) mappedDetails.capacity = parsedCapacity;
+  if (details.requireApproval !== undefined) mappedDetails.require_approval = details.requireApproval;
 
   // Add datetime fields if provided
   if (startDateTime) mappedDetails.start_date = startDateTime;
