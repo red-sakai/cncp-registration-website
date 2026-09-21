@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { Ticket } from 'lucide-react';
 
 interface EventCoverImageProps {
@@ -28,12 +27,11 @@ export function EventCoverImage({ src, alt }: EventCoverImageProps) {
     <div className="w-full aspect-square rounded-2xl overflow-hidden relative group">
       {/* Image Container */}
       <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
-        <Image 
-          src={src} 
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
           alt={alt}
-          fill
-          className="object-cover"
-          priority
+          className="w-full h-full object-cover"
         />
       </div>
       
