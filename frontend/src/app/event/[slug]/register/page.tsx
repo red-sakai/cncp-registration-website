@@ -36,6 +36,25 @@ export default function EventRegisterPage() {
     );
   }
 
+  const capacityNum = parseInt(event.capacity) || 0;
+  const isFull = capacityNum > 0 && (event.registeredCount ?? 0) >= capacityNum;
+
+  if (isFull) {
+    return (
+      <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0015] via-[#1a0533] to-[#0d1137] text-white relative overflow-hidden font-urbanist">
+        <BokehBackground />
+        <Squares direction="diagonal" speed={0.3} />
+        <div className="relative z-10 flex items-center justify-center min-h-screen">
+          <ErrorState
+            title="Event Full"
+            message="This event has reached maximum capacity. Registration is no longer available."
+            onAction={() => router.push(`/event/${slug}`)}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <RegistrationFlow eventSlug={slug} formQuestions={event.questions || []} />
   );
