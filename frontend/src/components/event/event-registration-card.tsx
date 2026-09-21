@@ -192,6 +192,43 @@ export function EventRegistrationCard({
         </div>
       )}
 
+      {/* Registration Progress Bar */}
+      <div className="mb-5">
+        <div className="flex items-center justify-between text-xs mb-1.5">
+          <span className="text-white/50">
+            {registeredCount} {registeredCount === 1 ? "person" : "people"} registered
+          </span>
+          {capacityNum > 0 ? (
+            <span className="text-white/50">
+              {capacityNum} spots
+            </span>
+          ) : (
+            <span className="text-white/50">
+              Unlimited capacity
+            </span>
+          )}
+        </div>
+        <div className="relative w-full h-2 rounded-full bg-white/10 overflow-hidden">
+          <div
+            className={`h-full rounded-full transition-all duration-500 ${
+              capacityNum > 0 && slotsAvailable <= 0
+                ? "bg-gradient-to-r from-red-500 to-red-400"
+                : isAlmostFull
+                ? "bg-gradient-to-r from-amber-500 to-yellow-400"
+                : "bg-gradient-to-r from-emerald-500 to-teal-400"
+            }`}
+            style={{
+              width: `${capacityNum > 0 ? Math.min((registeredCount / capacityNum) * 100, 100) : registeredCount > 0 ? 100 : 0}%`,
+            }}
+          />
+          {capacityNum === 0 && registeredCount > 0 && (
+            <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+              ∞
+            </span>
+          )}
+        </div>
+      </div>
+
       {shouldShowTicket && (
         <div className="mb-6">
           {/* Boarding Pass - White Only */}
