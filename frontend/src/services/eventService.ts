@@ -71,12 +71,8 @@ export async function getEventDetails(slug: string) {
   const row = await getEventBySlug(slug);
   const event = mapRowToEvent(row);
 
-  if (row.registered !== null && row.registered !== undefined) {
-    event.registeredCount = row.registered;
-  } else {
-    const { getRegistrantCountByEventSlug } = await import("@/repositories/registrantRepository");
-    event.registeredCount = await getRegistrantCountByEventSlug(slug);
-  }
+  const { getRegistrantCountByEventSlug } = await import("@/repositories/registrantRepository");
+  event.registeredCount = await getRegistrantCountByEventSlug(slug);
 
   return event;
 }
