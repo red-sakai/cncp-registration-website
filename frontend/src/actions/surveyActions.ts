@@ -82,10 +82,21 @@ export const submitSurveyResponseAction = withActionErrorHandler(
       userName = userProfile.first_name;
     }
 
-    const certificateBase64 = await generateCertificate(
-      userName,
-      validatedData.slug,
-    );
+    // Certificate generation must not fail the survey submission —
+    // the response is already saved above.
+    let certificateBase64: string | null = null;
+    try {
+      certificateBase64 = await generateCertificate(
+        userName,
+        validatedData.slug,
+      );
+    } catch (error) {
+      logger.warn(
+        `Certificate generation failed for event ${validatedData.slug} (survey still saved): ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
+    }
 
     revalidatePath(`/admin/events/${validatedData.slug}/manage`);
     logger.info(
